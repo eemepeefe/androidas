@@ -3,29 +3,39 @@ package com.example.eva.practica2;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity(tableName = "user")
 public class User {
 
-    @PrimaryKey(autoGenerate = true)
-    private int uid;
+    @ColumnInfo(name = "username")
+    @PrimaryKey
+    @NonNull
+    private String username;
 
     @ColumnInfo(name = "score")
-    private String score;
+    private int score;
 
-    public int getUid() {
-        return uid;
+    @ColumnInfo(name = "difficulty")
+    private int difficulty;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setUid(int uid) {
-        this.uid = uid;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(String score) {
+    public void setScore(int score) {
         this.score = score;
     }
+
+    public int getDifficulty() {return difficulty;}
+
+    public void setDifficulty(int dif){this.difficulty = dif;}
 }

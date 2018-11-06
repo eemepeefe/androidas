@@ -1,9 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ConfigActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="55dp"
+        android:text="Introduce tu nombre"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/plain_text_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="114dp"
+        android:inputType="text" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="191dp"
+        android:text="Elige la dificultad"
+        android:textSize="20sp" />
+
+
+    <RadioGroup
+        android:id="@+id/numberquestions"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginBottom="199dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/fivequestions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/numberquestions"
+            android:layout_alignStart="@+id/numberquestions"
+            android:layout_alignTop="@+id/numberquestions"
+            android:layout_toEndOf="@+id/numberquestions"
+            android:text="5 preguntas" />
+
+        <RadioButton
+            android:id="@+id/tenquestions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/numberquestions"
+            android:layout_alignStart="@+id/numberquestions"
+            android:layout_alignTop="@+id/numberquestions"
+            android:layout_toEndOf="@+id/numberquestions"
+            android:text="10 preguntas" />
+
+        <RadioButton
+            android:id="@+id/fifteenquestions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/numberquestions"
+            android:layout_alignStart="@+id/numberquestions"
+            android:layout_alignTop="@+id/numberquestions"
+            android:layout_toEndOf="@+id/numberquestions"
+            android:text="15 preguntas" />
+
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="300dp"
+        android:layout_marginRight="96dp"
+        android:text="Guardar configuración" />
+
+    <Button
+        android:id="@+id/backtomenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="400dp"
+        android:layout_marginRight="104dp"
+        android:text="Atrás" />
+
+</RelativeLayout>

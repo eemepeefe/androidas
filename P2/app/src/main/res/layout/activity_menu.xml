@@ -6,34 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
 
-    <Spinner
-        android:id="@+id/listaIdiomas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="156dp" />
-
-    <TextView
-        android:id="@+id/question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnComenzar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp"
-        android:padding="8dp"
-        android:text="Idioma"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/btnComenzar"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="179dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="61dp"
+        android:src="@mipmap/ic_launcher" />
+
+
+    <Button
+        android:id="@+id/btnJugar"
+        android:layout_width="124dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="280dp"
+        android:layout_marginEnd="121dp"
         android:padding="8dp"
-        android:text="Comenzar" />
+        android:text="Jugar" />
+
+    <Button
+        android:id="@+id/btnConfig"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="339dp"
+        android:layout_marginEnd="120dp"
+        android:padding="8dp"
+        android:text="Configuración" />
+
+    <Button
+        android:id="@+id/btnScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnConfig"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="410dp"
+        android:layout_marginEnd="5dp"
+        android:padding="8dp"
+        android:text="Puntuaciones" />
 
 </RelativeLayout>
