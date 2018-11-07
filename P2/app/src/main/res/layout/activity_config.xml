@@ -38,7 +38,7 @@
 
         android:layout_alignParentTop="true"
         android:layout_marginStart="115dp"
-        android:layout_marginTop="191dp"
+        android:layout_marginTop="166dp"
         android:text="Elige la dificultad"
         android:textSize="20sp" />
 
@@ -49,8 +49,8 @@
         android:layout_height="65dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginBottom="199dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="248dp"
         android:orientation="horizontal">
 
         <RadioButton
@@ -85,26 +85,69 @@
 
     </RadioGroup>
 
-
-    <Button
-        android:id="@+id/confirm"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dip"
-        android:layout_marginTop="300dp"
-        android:layout_marginRight="96dp"
-        android:text="Guardar configuración" />
+        android:layout_alignParentStart="true"
 
-    <Button
-        android:id="@+id/backtomenu"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="263dp"
+        android:text="Elige temática"
+        android:textSize="20sp" />
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dip"
-        android:layout_marginTop="400dp"
-        android:layout_marginRight="104dp"
-        android:text="Atrás" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="107dp"
+        android:layout_marginBottom="146dp">
+
+        <Button
+            android:id="@+id/indie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentRight="true"
+
+            android:text="Indie" />
+
+        <Button
+            android:id="@+id/rock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Rock" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/numberquestions"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginBottom="57dp">
+
+        <Button
+            android:id="@+id/confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:layout_alignParentRight="true"
+            android:text="Guardar configuración" />
+
+        <Button
+            android:id="@+id/backtomenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:text="Atrás" />
+    </LinearLayout>
+
 
 </RelativeLayout>

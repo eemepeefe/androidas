@@ -19,6 +19,9 @@ public class User {
     @ColumnInfo(name = "difficulty")
     private int difficulty;
 
+    @ColumnInfo(name = "category")
+    private String category;
+
     public String getUsername() {
         return username;
     }
@@ -38,4 +41,8 @@ public class User {
     public int getDifficulty() {return difficulty;}
 
     public void setDifficulty(int dif){this.difficulty = dif;}
+
+    public String getCategory(){return category;}
+
+    public void setCategory(String category){this.category=category;}
 }

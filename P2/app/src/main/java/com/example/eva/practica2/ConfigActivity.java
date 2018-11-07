@@ -21,11 +21,14 @@ public class ConfigActivity extends AppCompatActivity {
     private EditText texto;
     private Button btnConfirmar;
     private Button btnAtras;
+    private Button buttonIndie;
+    private Button buttonRock;
     private RadioGroup botonera;
     private RadioButton boton1;
     private RadioButton boton2;
     private RadioButton boton3;
     private int difficulty;
+    private String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,23 @@ public class ConfigActivity extends AppCompatActivity {
 
         texto = (EditText) findViewById(R.id.plain_text_input);
 
+        buttonIndie = (Button) findViewById(R.id.indie);
+        buttonRock = (Button) findViewById(R.id.rock);
+
+        buttonIndie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                category = "indie";
+            }
+        });
+
+        buttonRock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                category = "rock";
+            }
+        });
+
         btnConfirmar = (Button) findViewById(R.id.confirm);
 
 
@@ -76,6 +96,7 @@ public class ConfigActivity extends AppCompatActivity {
                 user.setUsername(username);
                 user.setScore(0);
                 user.setDifficulty(difficulty);
+                user.setCategory(category);
                 dao.insertAll(user);
 
                 List<User> totalUsers = dao.getAll();

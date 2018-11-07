@@ -39,5 +39,11 @@ public interface UserDao {
     @Query("DELETE FROM user")
     void nukeTable();
 
+    @Query("SELECT * FROM user ORDER BY username DESC LIMIT 1")
+    User getLastUser();
+
+    @Query("SELECT * FROM user ORDER BY score DESC LIMIT 10")
+    List<User> getTopTen();
+
 
 }
