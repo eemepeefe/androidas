@@ -86,11 +86,13 @@ public class ConfigActivity extends AppCompatActivity {
         });
 
         btnConfirmar = (Button) findViewById(R.id.confirm);
+        btnAtras = (Button)findViewById(R.id.backtomenu);
 
 
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dao.nukeTable();
                 String username = texto.getText().toString();
                 User user = new User();
                 user.setUsername(username);
@@ -103,6 +105,7 @@ public class ConfigActivity extends AppCompatActivity {
                 for (int i =0; i<totalUsers.size();i++){
                     System.out.println(totalUsers.get(i).getUsername());
                     System.out.println(totalUsers.get(i).getDifficulty());
+                    System.out.println(totalUsers.get(i).getCategory());
                 }
             }
         });

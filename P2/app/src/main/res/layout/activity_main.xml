@@ -11,17 +11,42 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-<TextView
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+
+        android:text="¿De quién es la canción?"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/totalpreguntas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+
+        android:text="Pregunta actual/Total de preguntas"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/aciertosfallos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+
+        android:text="Aciertos:  Fallos:"
+        android:textSize="20sp" />
+
+<LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-
-    android:layout_alignParentStart="true"
-
-    android:layout_alignParentTop="true"
-    android:layout_marginStart="97dp"
-    android:layout_marginTop="55dp"
-    android:text="¿De quién es la canción?"
-    android:textSize="20sp" />
+    android:layout_marginTop="10dp"
+    >
 
     <Button
         android:id="@+id/playbutton"
@@ -34,13 +59,13 @@
 
     <Button
 
-    android:id="@+id/pausebutton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+        android:id="@+id/pausebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-    android:layout_alignParentRight="true"
+        android:layout_alignParentRight="true"
 
-    android:text="Pause" />
+        android:text="Pause" />
 
     <Button
         android:id="@+id/stopbutton"
@@ -50,6 +75,14 @@
         android:layout_alignParentRight="true"
 
         android:text="Stop" />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="100dp"
+    android:layout_marginLeft="100dp"
+    >
 
     <Button
         android:id="@+id/answer1"
@@ -68,21 +101,33 @@
         android:layout_alignParentRight="true"
 
         android:text="Answer 2" />
-    <Button
-        android:id="@+id/answer3"
+</LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        >
 
-        android:layout_alignParentRight="true"
 
-        android:text="Answer 3" />
-    <Button
-        android:id="@+id/answer4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/answer3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
-        android:layout_alignParentRight="true"
+            android:layout_alignParentRight="true"
 
-        android:text="Answer 4" />
+            android:text="Answer 3" />
+
+        <Button
+            android:id="@+id/answer4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentRight="true"
+
+            android:text="Answer 4" />
+    </LinearLayout>
+
 
 </LinearLayout>
