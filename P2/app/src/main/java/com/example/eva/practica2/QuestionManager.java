@@ -6,26 +6,35 @@ import java.util.Random;
 
 public class QuestionManager {
 
-    //AQUI SE HARIAN VARIAS LISTAS DE VARIAS TEMATICAS
-    //HABRIA QUE METER TB OPCION DE TEMATICA EN LA BBDD PARA LA CONFIGURACION
-
     private List<Question> questionList;
-
-    //METER TODAS LAS RUTAS DE AUDIO EN LA CARPETA RES
 
     QuestionManager(String category) {
         System.out.println("Category is: " + category);
         questionList = new ArrayList<Question>();
 
-        //Estos ifs del demoño no me funcionan for some reason que desconozco
-       /* if (category=="indie"){
+        if (category.equals("indie")){
             introIndieQuestions();
 
-        } else if (category=="rock"){
+        } else if (category.equals("rock")){
             System.out.println("IGUALES MARI IGUALITOS");
             introRockQuestions();
         }
-        */
+    }
+
+    public List<Question> getQuestions(int numberQuestions) {
+        List<Question> auxQuestionList = new ArrayList<Question>();
+        for (int i = 0; i<numberQuestions; i++){
+            Random r = new Random();
+            int aux = r.nextInt(19-i);
+            auxQuestionList.add(questionList.get(aux));
+            questionList.remove(aux);
+            System.out.println("Tamaño lista preguntas : " + questionList.size());
+        }
+        return auxQuestionList;
+    }
+
+
+    public void introIndieQuestions(){
         questionList.add(new Question(0, R.raw.boikot_1, new String[]{"La Pegatina", "Boikot", "La Raiz", "Reincidentes"}, "Boikot" ));
         questionList.add(new Question(1, R.raw.boikot_2, new String[]{"La Raiz", "Boikot", "Porretas", "Extremoduro"}, "Boikot" ));
         questionList.add(new Question(2, R.raw.extremoduro_1, new String[]{"Extremoduro", "Boikot", "La Raiz", "Fito y Fitipaldis"}, "Extremoduro" ));
@@ -48,28 +57,6 @@ public class QuestionManager {
         questionList.add(new Question(19, R.raw.skap_2, new String[]{"La Polla Records", "Gatillazo", "Skap", "Reincidentes"}, "Skap" ));
     }
 
-    public List<Question> getQuestions(int numberQuestions) {
-        List<Question> auxQuestionList = new ArrayList<Question>();
-        for (int i = 0; i<numberQuestions; i++){
-            Random r = new Random();
-            int aux = r.nextInt(19-i);
-            auxQuestionList.add(questionList.get(aux));
-            questionList.remove(aux);
-            System.out.println("Tamaño lista preguntas : " + questionList.size());
-        }
-        return auxQuestionList;
-    }
-
-
-    public void introIndieQuestions(){
-
-    }
-
-    public void SaberSiHagoBienLasCosas(){
-        for (int i = 0; i<20; i++){
-            System.out.println(questionList.get(i).getCorrectAnswer());
-        }
-    }
 
     public void introRockQuestions(){
         questionList.add(new Question(0, R.raw.boikot_1, new String[]{"La Pegatina", "Boikot", "La Raiz", "Reincidentes"}, "Boikot" ));

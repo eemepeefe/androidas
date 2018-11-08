@@ -18,17 +18,17 @@ public interface UserDao {
     @Query("SELECT COUNT(*) from user")
     int countUsers();
 
-    @Query("SELECT score FROM user WHERE username=:uid")
-    int getScoreFromUser(String uid);
+    @Query("SELECT score FROM user WHERE id=:id")
+    int getScoreFromUser(int id);
 
-    @Query("UPDATE user SET score =:sc WHERE username =:uid")
-    void setScore(String uid, int sc);
+    @Query("UPDATE user SET score =:sc WHERE id =:id")
+    void setScore(int id, int sc);
 
-    @Query("SELECT difficulty FROM user WHERE username=:uid")
-    int getDifficultyFromUser(String uid);
+    @Query("SELECT difficulty FROM user WHERE id=:id")
+    int getDifficultyFromUser(int id);
 
-    @Query("UPDATE user SET difficulty =:dif WHERE username =:uid")
-    void setDifficulty(String uid, int dif);
+    @Query("UPDATE user SET difficulty =:dif WHERE id=:id")
+    void setDifficulty(int id, int dif);
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     void insertAll(User... users);
@@ -39,7 +39,7 @@ public interface UserDao {
     @Query("DELETE FROM user")
     void nukeTable();
 
-    @Query("SELECT * FROM user ORDER BY username DESC LIMIT 1")
+    @Query("SELECT * FROM user ORDER BY id DESC LIMIT 1")
     User getLastUser();
 
     @Query("SELECT * FROM user ORDER BY score DESC LIMIT 10")

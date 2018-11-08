@@ -1,7 +1,9 @@
 package com.example.eva.practica2;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private int aciertos;
     private int fallos;
 
-
+    private User user;
     private AppDatabase db;
     private UserDao dao;
 
@@ -55,8 +58,55 @@ public class MainActivity extends AppCompatActivity {
         dao = db.userDao();
         player_settings = dao.getLastUser();
 
+        if(player_settings.getScore()!=-1){
+            //if no se ha creado config
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    MainActivity.this);
 
-        //si no se ha creado configuración (lo compruebo si el score es distinto de 0 porque un user nuevo no tiene score)
+            // set title
+            alertDialogBuilder.setTitle("No se ha introducido configuración.");
+
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage("¿Deseas continuar como anónimo con configuración estándar (10 preguntas, categoría aleatoria) o volver al menú?")
+                    .setCancelable(false)
+                    .setPositiveButton("Continuar como anónimo",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            Random rnd = new Random();
+                            int useraux = rnd.nextInt(1000);
+                            String username = "anon"+useraux;
+                            user = new User();
+                            user.setUsername(username);
+                            user.setScore(-1);
+                            user.setDifficulty(10);
+                            int categoryaux = rnd.nextInt(1);
+
+                            if(categoryaux==1)
+                                user.setCategory("rock");
+                            else
+                                user.setCategory("indie");
+
+                            dao.insertAll(user);
+                            player_settings = dao.getLastUser();
+                        }
+                    })
+                    .setNegativeButton("Volver a configuración",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            Intent intent = new Intent(MainActivity.this, ConfigActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+            // show it
+            alertDialog.show();
+        }
+
+
+
+
         //le doy a elegir a continuar como anon o volver atrás o sea que me falta aquí un pop up o algo de eso
         //si continuo como anon inserto un anon+numero random en la bd
 
@@ -192,8 +242,13 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             Intent intent = new Intent(MainActivity.this, EndGameActivity.class);
-            dao.setScore(player_settings.getUsername(), aciertos);
+            int scoreaux = (aciertos/numQuestions)*100;
+            dao.setScore(player_settings.getId(), scoreaux);
             //Mandar aciertos y fallos en el intent a la siguiente actividad
+            Bundle bundle = new Bundle();
+            bundle.putInt("ACIERTOS", aciertos);
+            bundle.putInt("FALLOS", fallos);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     }

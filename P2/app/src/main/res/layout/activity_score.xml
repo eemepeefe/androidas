@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ScoreActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginTop="15dp"
+
+        android:text="HALL OF FAME:"
+        android:textSize="20sp" />
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main_table"
+        android:layout_marginTop="60dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <TableRow
+            android:id="@+id/tablerow">
+            <TextView android:id="@+id/usernamerow"/>
+            <TextView android:id="@+id/difficultyrow"/>
+            <TextView android:id="@+id/scorerow"/>
+        </TableRow>
+    </TableLayout>
+
+
+
+</RelativeLayout>

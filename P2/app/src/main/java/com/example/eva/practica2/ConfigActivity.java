@@ -88,21 +88,21 @@ public class ConfigActivity extends AppCompatActivity {
         btnConfirmar = (Button) findViewById(R.id.confirm);
         btnAtras = (Button)findViewById(R.id.backtomenu);
 
-
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dao.nukeTable();
+
                 String username = texto.getText().toString();
                 User user = new User();
                 user.setUsername(username);
-                user.setScore(0);
+                user.setScore(-1);
                 user.setDifficulty(difficulty);
                 user.setCategory(category);
                 dao.insertAll(user);
 
                 List<User> totalUsers = dao.getAll();
                 for (int i =0; i<totalUsers.size();i++){
+                    System.out.println(totalUsers.get(i).getId());
                     System.out.println(totalUsers.get(i).getUsername());
                     System.out.println(totalUsers.get(i).getDifficulty());
                     System.out.println(totalUsers.get(i).getCategory());
