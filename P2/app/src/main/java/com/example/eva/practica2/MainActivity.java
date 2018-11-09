@@ -56,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
         db  = AppDatabase.getAppDatabase(this);
         dao = db.userDao();
+
         player_settings = dao.getLastUser();
 
-        if(player_settings.getScore()!=-1){
+        if(player_settings==null || (player_settings.getScore()!=-1) ){
+            System.out.println("ENTRA");
             //if no se ha creado config
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                     MainActivity.this);
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton("Continuar como anónimo",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int id) {
                             Random rnd = new Random();
-                            int useraux = rnd.nextInt(1000);
+                            int useraux = (int) rnd.nextInt(1000);
                             String username = "anon"+useraux;
                             user = new User();
                             user.setUsername(username);
@@ -85,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                                 user.setCategory("rock");
                             else
                                 user.setCategory("indie");
-
                             dao.insertAll(user);
                             player_settings = dao.getLastUser();
                         }
@@ -106,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
         //le doy a elegir a continuar como anon o volver atrás o sea que me falta aquí un pop up o algo de eso
         //si continuo como anon inserto un anon+numero random en la bd
 
@@ -121,110 +121,112 @@ public class MainActivity extends AppCompatActivity {
         totalpreguntas = (TextView) findViewById(R.id.totalpreguntas);
         aciertosfallos = (TextView) findViewById(R.id.aciertosfallos);
 
+        if(player_settings!=null) {
 
-        //Opciones de la partida desde la bd y datos necesarios para la misma
-        System.out.println("Tu usuario es " + player_settings.getUsername());
-        questionManager = new QuestionManager(player_settings.getCategory());
-        //questionManager.SaberSiHagoBienLasCosas();
-        questions = questionManager.getQuestions(player_settings.getDifficulty());
-        numQuestions = questions.size();
-        questionIndex = 0;
-        aciertos = 0;
+            //Opciones de la partida desde la bd y datos necesarios para la misma
+            System.out.println("Tu usuario es " + player_settings.getUsername());
+            questionManager = new QuestionManager(player_settings.getCategory());
+            //questionManager.SaberSiHagoBienLasCosas();
+            questions = questionManager.getQuestions(player_settings.getDifficulty());
+            numQuestions = questions.size();
+            questionIndex = 0;
+            aciertos = 0;
 
-        siguientePregunta();
+            siguientePregunta();
 
-        //Botones para el audio
-        buttonPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!prepared) {
-                    try {
-                        mediaPlayer.prepare();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+            //Botones para el audio
+            buttonPlay.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!prepared) {
+                        try {
+                            mediaPlayer.prepare();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        prepared = true;
                     }
-                    prepared = true;
+                    mediaPlayer.start();
                 }
-                mediaPlayer.start();
-            }
-        });
+            });
 
-        buttonPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mediaPlayer.pause();
-            }
-        });
-
-        buttonStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mediaPlayer.stop();
-                prepared = false;
-            }
-        });
-
-
-        //Botones respuesta
-        answer1.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                if (answer1.getText() == correctAnswer){
-                    aciertos++;
-                    mediaPlayer.stop();
-                    siguientePregunta();
-                } else {
-                    fallos++;
-                    mediaPlayer.stop();
-                    siguientePregunta();
+            buttonPause.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mediaPlayer.pause();
                 }
-            }
-        });
+            });
 
-        answer2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                if (answer2.getText() == correctAnswer){
-                    aciertos++;
+            buttonStop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     mediaPlayer.stop();
-                    siguientePregunta();
-                } else {
-                    fallos++;
-                    mediaPlayer.stop();
-                    siguientePregunta();
+                    prepared = false;
                 }
-            }
-        });
+            });
 
-        answer3.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                if (answer3.getText() == correctAnswer){
-                    aciertos++;
-                    mediaPlayer.stop();
-                    siguientePregunta();
-                } else {
-                    fallos++;
-                    mediaPlayer.stop();
-                    siguientePregunta();
-                }
-            }
-        });
 
-        answer4.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                if (answer4.getText() == correctAnswer){
-                    aciertos++;
-                    mediaPlayer.stop();
-                    siguientePregunta();
-                } else {
-                    fallos++;
-                    mediaPlayer.stop();
-                    siguientePregunta();
+            //Botones respuesta
+            answer1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (answer1.getText() == correctAnswer) {
+                        aciertos++;
+                        mediaPlayer.stop();
+                        siguientePregunta();
+                    } else {
+                        fallos++;
+                        mediaPlayer.stop();
+                        siguientePregunta();
+                    }
                 }
-            }
-        });
+            });
+
+            answer2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (answer2.getText() == correctAnswer) {
+                        aciertos++;
+                        mediaPlayer.stop();
+                        siguientePregunta();
+                    } else {
+                        fallos++;
+                        mediaPlayer.stop();
+                        siguientePregunta();
+                    }
+                }
+            });
+
+            answer3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (answer3.getText() == correctAnswer) {
+                        aciertos++;
+                        mediaPlayer.stop();
+                        siguientePregunta();
+                    } else {
+                        fallos++;
+                        mediaPlayer.stop();
+                        siguientePregunta();
+                    }
+                }
+            });
+
+            answer4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (answer4.getText() == correctAnswer) {
+                        aciertos++;
+                        mediaPlayer.stop();
+                        siguientePregunta();
+                    } else {
+                        fallos++;
+                        mediaPlayer.stop();
+                        siguientePregunta();
+                    }
+                }
+            });
+        }
     }
 
 
@@ -242,8 +244,10 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             Intent intent = new Intent(MainActivity.this, EndGameActivity.class);
-            int scoreaux = (aciertos/numQuestions)*100;
-            dao.setScore(player_settings.getId(), scoreaux);
+            float scoreaux = (float)aciertos/numQuestions;
+            scoreaux=scoreaux*100;
+            System.out.println(scoreaux);
+            dao.setScore(player_settings.getId(), (int)scoreaux);
             //Mandar aciertos y fallos en el intent a la siguiente actividad
             Bundle bundle = new Bundle();
             bundle.putInt("ACIERTOS", aciertos);

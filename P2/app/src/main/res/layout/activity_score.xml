@@ -24,12 +24,7 @@
         android:layout_marginTop="60dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
-        <TableRow
-            android:id="@+id/tablerow">
-            <TextView android:id="@+id/usernamerow"/>
-            <TextView android:id="@+id/difficultyrow"/>
-            <TextView android:id="@+id/scorerow"/>
-        </TableRow>
+
     </TableLayout>
 
 

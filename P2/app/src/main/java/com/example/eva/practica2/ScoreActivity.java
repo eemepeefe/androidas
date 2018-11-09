@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,10 @@ public class ScoreActivity extends AppCompatActivity {
     private List<User> topten;
 
     private TableLayout table;
-    private TableRow tablerow;
+    private TextView usernameview;
+    private TextView difficultyview;
+    private TextView scoreview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,52 +28,51 @@ public class ScoreActivity extends AppCompatActivity {
 
         db  = AppDatabase.getAppDatabase(this);
         dao = db.userDao();
-
-        table = (TableLayout) findViewById(R.id.main_table);
-        tablerow = (TableRow) findViewById(R.id.tablerow);
-
-
         topten = new ArrayList<User>();
         topten = dao.getTopTen();
 
-        /*TextView[] textArray = new TextView[productsList.length()];
-        TableRow[] tr_head = new TableRow[productsList.length()];
+        table = (TableLayout) findViewById(R.id.main_table);
 
-        for(int i=0; i<productsList.length();i++){
-            JSONObject product = productsList.getJSONObject(i);
-            JSONObject productData = product.getJSONObject("Product");
-            String productDescription = productData.getString("description");
+        TableRow contentrow= new TableRow(this);
+        TableRow.LayoutParams lpcontent = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+        contentrow.setLayoutParams(lpcontent);
+        usernameview = new TextView(this);
+        difficultyview = new TextView(this);
+        scoreview = new TextView(this);
+        usernameview.setText("USUARIO");
+        difficultyview.setText("N PREGUNTAS");
+        scoreview.setText("ACIERTOS (%)");
+        contentrow.addView(usernameview);
+        contentrow.addView(difficultyview);
+        contentrow.addView(scoreview);
+        table.addView(contentrow,0);
 
-//Create the tablerows
-            tr_head[i] = new TableRow(this);
-            tr_head[i].setId(i+1);
-            tr_head[i].setBackgroundColor(Color.GRAY);
-            tr_head[i].setLayoutParams(new LayoutParams(
-                    LayoutParams.MATCH_PARENT,
-                    LayoutParams.WRAP_CONTENT));
+        for (int i = 0; i<topten.size(); i++){
+            TableRow row= new TableRow(this);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+            row.setLayoutParams(lp);
 
-            // Here create the TextView dynamically
+            usernameview = new TextView(this);
+            difficultyview = new TextView(this);
+            scoreview = new TextView(this);
 
-            textArray[i] = new TextView(this);
-            textArray[i].setId(i+111);
-            textArray[i].setText(productDescription);
-            textArray[i].setTextColor(Color.WHITE);
-            textArray[i].setPadding(5, 5, 5, 5);
-            tr_head[i].addView(textArray[i]);
-// Add each table row to table layout
+            if (topten.get(i)!=null) {
+                usernameview.setText(topten.get(i).getUsername());
+                //EL GETDIFFICULTY NO FUNCA
+                //difficultyview.setText(topten.get(i).getDifficulty()+  " questions");
+                scoreview.setText(topten.get(i).getScore() + "%");
+            }
 
-            tl.addView(tr_head[i], new TableLayout.LayoutParams(
-                    LayoutParams.MATCH_PARENT,
-                    LayoutParams.WRAP_CONTENT));
+            row.addView(usernameview);
+            //row.addView(difficultyview);
+            row.addView(scoreview);
+            table.addView(row,i+1);
 
-        } // end of for loop
-
-        for (int i = 0; i<10; i++){
-            topten.get(i).getUsername();
-            topten.get(i).getDifficulty();
-            topten.get(i).getScore();
         }
-*/
+
+
+
+
         //aquí tengo que tener yo una tablita con jugadores y scores
         //que almaceno de forma persistente, o sea se que
         //creo que los voy a tener en la bd y haré una query ordenando
