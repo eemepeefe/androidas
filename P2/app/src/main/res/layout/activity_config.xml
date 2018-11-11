@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_1"
     tools:context=".ConfigActivity">
 
     <TextView
@@ -13,8 +14,11 @@
         android:layout_alignParentStart="true"
 
         android:layout_alignParentTop="true"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="55dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="115dp"
+        android:textColor="@android:color/white"
         android:text="Introduce tu nombre"
         android:textSize="20sp" />
 
@@ -26,7 +30,8 @@
         android:layout_alignParentTop="true"
 
         android:layout_marginStart="0dp"
-        android:layout_marginTop="114dp"
+        android:layout_marginTop="93dp"
+        android:textColor="@android:color/white"
         android:inputType="text" />
 
 
@@ -37,8 +42,9 @@
         android:layout_alignParentStart="true"
 
         android:layout_alignParentTop="true"
-        android:layout_marginStart="115dp"
-        android:layout_marginTop="166dp"
+        android:layout_marginStart="127dp"
+        android:layout_marginTop="163dp"
+        android:textColor="@android:color/white"
         android:text="Elige la dificultad"
         android:textSize="20sp" />
 
@@ -48,9 +54,11 @@
         android:layout_width="wrap_content"
         android:layout_height="65dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="248dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="214dp"
+        android:layout_marginBottom="379dp"
         android:orientation="horizontal">
 
         <RadioButton
@@ -61,7 +69,9 @@
             android:layout_alignStart="@+id/numberquestions"
             android:layout_alignTop="@+id/numberquestions"
             android:layout_toEndOf="@+id/numberquestions"
-            android:text="5 preguntas" />
+            android:background="@drawable/boton"
+            android:text="5 preguntas"
+            android:textColor="@drawable/txt_boton" />
 
         <RadioButton
             android:id="@+id/tenquestions"
@@ -71,7 +81,9 @@
             android:layout_alignStart="@+id/numberquestions"
             android:layout_alignTop="@+id/numberquestions"
             android:layout_toEndOf="@+id/numberquestions"
-            android:text="10 preguntas" />
+            android:background="@drawable/boton"
+            android:text="10 preguntas"
+            android:textColor="@drawable/txt_boton" />
 
         <RadioButton
             android:id="@+id/fifteenquestions"
@@ -81,7 +93,9 @@
             android:layout_alignStart="@+id/numberquestions"
             android:layout_alignTop="@+id/numberquestions"
             android:layout_toEndOf="@+id/numberquestions"
-            android:text="15 preguntas" />
+            android:background="@drawable/boton"
+            android:text="15 preguntas"
+            android:textColor="@drawable/txt_boton" />
 
     </RadioGroup>
 
@@ -92,8 +106,9 @@
         android:layout_alignParentStart="true"
 
         android:layout_alignParentTop="true"
-        android:layout_marginStart="122dp"
-        android:layout_marginTop="263dp"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="312dp"
+        android:textColor="@android:color/white"
         android:text="Elige temática"
         android:textSize="20sp" />
 
@@ -102,8 +117,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="107dp"
-        android:layout_marginBottom="146dp">
+        android:layout_marginStart="117dp"
+        android:layout_marginBottom="249dp">
 
         <Button
             android:id="@+id/indie"
@@ -112,14 +127,20 @@
 
             android:layout_alignParentRight="true"
 
-            android:text="Indie" />
+            android:background="@drawable/boton"
+            android:text="Indie"
+
+            android:textColor="@drawable/txt_boton" />
 
         <Button
             android:id="@+id/rock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="Rock" />
+            android:background="@drawable/boton"
+            android:text="Rock"
+
+            android:textColor="@drawable/txt_boton" />
 
     </LinearLayout>
 
@@ -128,8 +149,8 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/numberquestions"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginBottom="57dp">
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="121dp">
 
         <Button
             android:id="@+id/confirm"
@@ -138,7 +159,10 @@
 
 
             android:layout_alignParentRight="true"
-            android:text="Guardar configuración" />
+            android:background="@drawable/boton"
+
+            android:text="Guardar configuración"
+            android:textColor="@drawable/txt_boton" />
 
         <Button
             android:id="@+id/backtomenu"
@@ -146,7 +170,10 @@
             android:layout_height="wrap_content"
 
 
-            android:text="Atrás" />
+            android:background="@drawable/boton"
+
+            android:text="Atrás"
+            android:textColor="@drawable/txt_boton" />
     </LinearLayout>
 
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_1"
     tools:context=".ScoreActivity">
 
     <TextView
@@ -13,9 +14,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
 
-        android:layout_marginTop="15dp"
+        android:layout_alignParentEnd="true"
 
+        android:layout_marginStart="133dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="137dp"
         android:text="HALL OF FAME:"
+        android:textColor="@android:color/white"
         android:textSize="20sp" />
 
     <TableLayout
@@ -23,7 +28,8 @@
         android:id="@+id/main_table"
         android:layout_marginTop="60dp"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:textColor="@android:color/white">
 
     </TableLayout>
 

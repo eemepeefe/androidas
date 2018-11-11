@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_1"
     tools:context=".EndGameActivity">
 
     <TextView
@@ -15,6 +16,7 @@
 
         android:layout_marginStart="25dp"
         android:layout_marginTop="45dp"
+        android:textColor="@android:color/white"
         android:text="¡Partida finalizada! Tu puntuación es:"
         android:textSize="20sp" />
 
@@ -27,6 +29,7 @@
 
         android:layout_marginStart="122dp"
         android:layout_marginTop="92dp"
+        android:textColor="@android:color/white"
         android:text="Aciertos:  Fallos:"
         android:textSize="20sp" />
 
@@ -35,11 +38,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
 
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="111dp"
-        android:layout_marginBottom="141dp"
-        android:text="Volver al menú" />
+        android:layout_marginStart="146dp"
+        android:layout_marginRight="148dp"
+        android:layout_marginBottom="297dp"
+        android:background="@drawable/boton"
+        android:text="Volver al menú"
+        android:textColor="@drawable/txt_boton" />
 
     </RelativeLayout>
