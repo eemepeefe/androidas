@@ -10,40 +10,61 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:orientation="vertical"
+    android:id="@+id/mainlayout"
     android:background="@drawable/fondo_1"
     tools:context=".MainActivity">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="130dp">
 
-        android:layout_alignParentStart="true"
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="¿De quién es la canción?"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
 
-        android:layout_alignParentTop="true"
+        <TextView
+            android:id="@+id/totalpreguntas"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
 
-        android:text="¿De quién es la canción?"
-        android:textColor="@android:color/white"
-        android:textSize="30sp" />
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="38dp"
+            android:text="Pregunta actual/Total de preguntas"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/totalpreguntas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:textColor="@android:color/white"
-        android:text="Pregunta actual/Total de preguntas"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/aciertosfallos"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="60dp"
+            android:text="Aciertos:  Fallos:"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/aciertosfallos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:textColor="@android:color/white"
-        android:text="Aciertos:  Fallos:"
-        android:textSize="14sp" />
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="136dp"
+            android:layout_marginTop="90dp"
+            android:background="#000000"
+            android:padding="10dp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="321dp"

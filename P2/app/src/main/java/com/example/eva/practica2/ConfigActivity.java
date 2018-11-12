@@ -2,6 +2,7 @@ package com.example.eva.practica2;
 
 import android.arch.persistence.room.Room;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -30,18 +32,34 @@ public class ConfigActivity extends AppCompatActivity {
     private int difficulty;
     private String category;
 
+    private Typeface veganfont;
+
+    private TextView elegirnombre;
+    private TextView elegirpreguntas;
+    private TextView elegirtematica;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
         db  = AppDatabase.getAppDatabase(this);
         dao = db.userDao();
-
+        veganfont = Typeface.createFromAsset(getAssets(),  "fonts/timeburnerbold.ttf");
         //SI EN ESTA PANTALLA NO SE HA METIDO NADA, HAY QUE AVISAR AL USUARIO CUANDO LE DA A JUGAR
 
+        elegirnombre = (TextView)findViewById(R.id.introducenombre);
+        elegirpreguntas = (TextView)findViewById(R.id.numeropreguntas);
+        elegirtematica = (TextView)findViewById(R.id.eligetematica);
+        elegirnombre.setTypeface(veganfont);
+        elegirpreguntas.setTypeface(veganfont);
+        elegirtematica.setTypeface(veganfont);
+
         boton1 = (RadioButton)findViewById(R.id.fivequestions);
+        boton1.setTypeface(veganfont);
         boton2 = (RadioButton)findViewById(R.id.tenquestions);
+        boton2.setTypeface(veganfont);
         boton3 = (RadioButton)findViewById(R.id.tenquestions);
+        boton3.setTypeface(veganfont);
 
         View.OnClickListener list = new View.OnClickListener() {
             @Override
@@ -67,9 +85,12 @@ public class ConfigActivity extends AppCompatActivity {
         boton3.setOnClickListener(list);
 
         texto = (EditText) findViewById(R.id.plain_text_input);
+        texto.setTypeface(veganfont);
 
         buttonIndie = (Button) findViewById(R.id.indie);
+        buttonIndie.setTypeface(veganfont);
         buttonRock = (Button) findViewById(R.id.rock);
+        buttonRock.setTypeface(veganfont);
 
         buttonIndie.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +107,9 @@ public class ConfigActivity extends AppCompatActivity {
         });
 
         btnConfirmar = (Button) findViewById(R.id.confirm);
+        btnConfirmar.setTypeface(veganfont);
         btnAtras = (Button)findViewById(R.id.backtomenu);
+        btnAtras.setTypeface(veganfont);
 
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override

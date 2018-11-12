@@ -11,10 +11,6 @@ public class QuestionManager {
 
     private List<Question> questions;
 
-    private List<Integer> resourcesList;
-    private List<String> answersList;
-    private List <String> correctAnswersList;
-
     private QuestionDatabase db;
     private QuestionDao daoquestion;
 

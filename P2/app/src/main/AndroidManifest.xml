@@ -9,16 +9,16 @@
         android:roundIcon="@mipmap/music_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuActivity">
+        <activity android:name=".MenuActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ConfigActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ScoreActivity" />
-        <activity android:name=".EndGameActivity"></activity>
+        <activity android:name=".ConfigActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ScoreActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".EndGameActivity" android:screenOrientation="portrait"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

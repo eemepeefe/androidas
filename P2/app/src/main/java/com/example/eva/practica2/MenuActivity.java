@@ -2,6 +2,7 @@ package com.example.eva.practica2;
 
 import android.arch.persistence.room.Room;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,18 +21,25 @@ public class MenuActivity extends AppCompatActivity {
     private Button buttonConfig;
     private Button buttonScore;
 
+    private Typeface veganfont;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        veganfont = Typeface.createFromAsset(getAssets(),  "fonts/timeburnerbold.ttf");
 
         //Creación de las DB
         gameDB = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME).build();
         questionDB = Room.databaseBuilder(getApplicationContext(), QuestionDatabase.class, DATABASE_NAME).build();
 
         buttonJugar = (Button) findViewById(R.id.btnJugar);
+        buttonJugar.setTypeface(veganfont);
         buttonConfig = (Button) findViewById(R.id.btnConfig);
+        buttonConfig.setTypeface(veganfont);
         buttonScore = (Button) findViewById(R.id.btnScore);
+        buttonScore.setTypeface(veganfont);
 
         //Botones
         buttonJugar.setOnClickListener(new View.OnClickListener(){
