@@ -27,6 +27,7 @@ public interface QuestionDao {
     @Query("DELETE FROM questions")
     void nukeTable();
 
-
+    @Query("SELECT * FROM questions WHERE type=:category")
+    List<Question> getQuestions(String category);
 
 }

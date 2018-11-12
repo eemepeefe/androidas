@@ -18,7 +18,6 @@ public class ScoreActivity extends AppCompatActivity {
 
     private TableLayout table;
     private TextView usernameview;
-    private TextView difficultyview;
     private TextView scoreview;
 
     @Override
@@ -37,13 +36,10 @@ public class ScoreActivity extends AppCompatActivity {
         TableRow.LayoutParams lpcontent = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         contentrow.setLayoutParams(lpcontent);
         usernameview = new TextView(this);
-        difficultyview = new TextView(this);
         scoreview = new TextView(this);
         usernameview.setText("USUARIO");
-        difficultyview.setText("N PREGUNTAS");
         scoreview.setText("ACIERTOS (%)");
         contentrow.addView(usernameview);
-        contentrow.addView(difficultyview);
         contentrow.addView(scoreview);
         table.addView(contentrow,0);
 
@@ -53,29 +49,17 @@ public class ScoreActivity extends AppCompatActivity {
             row.setLayoutParams(lp);
 
             usernameview = new TextView(this);
-            difficultyview = new TextView(this);
             scoreview = new TextView(this);
 
-            if (topten.get(i)!=null) {
+            if (topten.get(i)!=null && topten.get(i).getScore()!=-1) {
                 usernameview.setText(topten.get(i).getUsername());
-                //EL GETDIFFICULTY NO FUNCA
-                //difficultyview.setText(topten.get(i).getDifficulty()+  " questions");
                 scoreview.setText(topten.get(i).getScore() + "%");
             }
 
             row.addView(usernameview);
-            //row.addView(difficultyview);
             row.addView(scoreview);
             table.addView(row,i+1);
 
         }
-
-
-
-
-        //aquí tengo que tener yo una tablita con jugadores y scores
-        //que almaceno de forma persistente, o sea se que
-        //creo que los voy a tener en la bd y haré una query ordenando
-        //las 10 mejores o algo así
     }
 }

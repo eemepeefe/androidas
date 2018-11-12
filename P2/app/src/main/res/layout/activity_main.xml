@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,6 +10,7 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:orientation="vertical"
+    android:background="@drawable/fondo_1"
     tools:context=".MainActivity">
 
     <TextView
@@ -20,7 +22,8 @@
         android:layout_alignParentTop="true"
 
         android:text="¿De quién es la canción?"
-        android:textSize="20sp" />
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/totalpreguntas"
@@ -28,9 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-
+        android:textColor="@android:color/white"
         android:text="Pregunta actual/Total de preguntas"
-        android:textSize="20sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/aciertosfallos"
@@ -38,114 +41,114 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-
+        android:textColor="@android:color/white"
         android:text="Aciertos:  Fallos:"
-        android:textSize="20sp" />
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    >
-
-    <Button
-        android:id="@+id/playbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentRight="true"
-
-        android:textColor="@drawable/txt_boton"
-        android:background="@drawable/boton"
-
-        android:text="Play" />
-
-    <Button
-
-        android:id="@+id/pausebutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentRight="true"
-
-        android:textColor="@drawable/txt_boton"
-        android:background="@drawable/boton"
-
-        android:text="Pause" />
-
-    <Button
-        android:id="@+id/stopbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentRight="true"
-
-        android:textColor="@drawable/txt_boton"
-        android:background="@drawable/boton"
-
-        android:text="Stop" />
-</LinearLayout>
+        android:textSize="14sp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="100dp">
+        android:layout_width="321dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="10dp">
 
         <Button
-            android:id="@+id/answer1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/playbutton"
+            android:layout_width="107dp"
+            android:layout_height="63dp"
 
             android:layout_alignParentRight="true"
 
-            android:textColor="@drawable/txt_boton"
             android:background="@drawable/boton"
+            android:text="Play"
 
-            android:text="Answer 1" />
+            android:textColor="@drawable/txt_boton" />
 
         <Button
-            android:id="@+id/answer2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+            android:id="@+id/pausebutton"
+            android:layout_width="103dp"
+            android:layout_height="63dp"
 
             android:layout_alignParentRight="true"
 
-            android:textColor="@drawable/txt_boton"
             android:background="@drawable/boton"
+            android:text="Pause"
 
-            android:text="Answer 2" />
+            android:textColor="@drawable/txt_boton" />
+
+        <Button
+            android:id="@+id/stopbutton"
+            android:layout_width="98dp"
+            android:layout_height="62dp"
+
+            android:layout_alignParentRight="true"
+
+            android:background="@drawable/boton"
+            android:text="Stop"
+
+            android:textColor="@drawable/txt_boton" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp">
+        android:layout_width="270dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="40dp">
+
+        <Button
+            android:id="@+id/answer1"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+
+            android:layout_alignParentRight="true"
+
+            android:background="@drawable/boton"
+            android:text="Answer 1"
+
+            android:textColor="@drawable/txt_boton" />
+
+        <Button
+            android:id="@+id/answer2"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+
+            android:layout_alignParentRight="true"
+
+            android:background="@drawable/boton"
+            android:text="Answer 2"
+
+            android:textColor="@drawable/txt_boton" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="270dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp">
 
 
         <Button
             android:id="@+id/answer3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
 
             android:layout_alignParentRight="true"
 
-            android:textColor="@drawable/txt_boton"
             android:background="@drawable/boton"
+            android:text="Answer 3"
 
-            android:text="Answer 3" />
+            android:textColor="@drawable/txt_boton" />
 
         <Button
             android:id="@+id/answer4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
+            android:layout_width="120dp"
+            android:layout_height="80dp"
             android:layout_alignParentRight="true"
 
-            android:textColor="@drawable/txt_boton"
             android:background="@drawable/boton"
+            android:text="Answer 4"
 
-            android:text="Answer 4" />
+            android:textColor="@drawable/txt_boton" />
     </LinearLayout>
 
 

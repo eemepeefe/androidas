@@ -126,8 +126,10 @@ public class MainActivity extends AppCompatActivity {
             //Opciones de la partida desde la bd y datos necesarios para la misma
             System.out.println("Tu usuario es " + player_settings.getUsername());
             questionManager = new QuestionManager(this);
-            //questionManager.SaberSiHagoBienLasCosas();
-            questions = questionManager.getQuestions(player_settings.getDifficulty());
+            questionManager.getQuestionsByTheme( player_settings.getCategory());
+            //getcategory y dependiendo de la que sea cambiar android:background
+            //meter la fuente nueva tb en assets/fonts
+            questions = questionManager.getNumberOfQuestions(player_settings.getDifficulty());
             numQuestions = questions.size();
             questionIndex = 0;
             aciertos = 0;
@@ -235,10 +237,11 @@ public class MainActivity extends AppCompatActivity {
 
             updateViews();
             mediaPlayer = MediaPlayer.create(MainActivity.this, questions.get(questionIndex).getQuestionRoute());
-            answer1.setText(questions.get(questionIndex).getPossibleAnswers()[0]);
-            answer2.setText(questions.get(questionIndex).getPossibleAnswers()[1]);
-            answer3.setText(questions.get(questionIndex).getPossibleAnswers()[2]);
-            answer4.setText(questions.get(questionIndex).getPossibleAnswers()[3]);
+            String[] splittedAnswers = questions.get(questionIndex).splitAnswers();
+            answer1.setText(splittedAnswers[0]);
+            answer2.setText(splittedAnswers[1]);
+            answer3.setText(splittedAnswers[2]);
+            answer4.setText(splittedAnswers[3]);
             correctAnswer = questions.get(questionIndex).getCorrectAnswer();
             questionIndex++;
 

@@ -36,13 +36,10 @@ public class Question {
         this.correctAnswer=correctAnswer;
     }
 
-    public List<String> splitAnswers(){
-        List<String> aux = new ArrayList<String>();
+    public String[] splitAnswers(){
+
         String[] split = this.possibleAnswers.split(";");
-        for (int i = 0; i<4; i++){
-            aux.add(split[i]);
-        }
-        return aux;
+        return split;
     }
     public int getQuestionIndex() {return questionIndex;}
     public void setQuestionIndex(int index){this.questionIndex=index;}

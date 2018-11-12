@@ -1,8 +1,6 @@
 package com.example.eva.practica2;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +9,7 @@ public class QuestionManager {
 
     private List<Question> questionList;
 
-    private List<Question> questionsForMainClass;
+    private List<Question> questions;
 
     private List<Integer> resourcesList;
     private List<String> answersList;
@@ -25,31 +23,31 @@ public class QuestionManager {
         daoquestion = db.questionDao();
         if(daoquestion.countQuestions()==0){
             questionList = new ArrayList<>();
-            //questionlist.rellenar
+            addQuestions();
             for (int i = 0; i<questionList.size(); i++){
                 daoquestion.insert(questionList.get(i));
             }
-
         }
     }
 
-    public List<Question> getQuestionListFromDB(String category){
-        //query para coger la lista de DB y pegarla en la lista de preguntas
+    public void getQuestionsByTheme(String category){
+        questions = new ArrayList<>();
+        questions = daoquestion.getQuestions(category);
     }
+
     public List<Question> getNumberOfQuestions(int numberQuestions) {
         List<Question> auxQuestionList = new ArrayList<Question>();
         for (int i = 0; i<numberQuestions; i++){
             Random r = new Random();
             int aux = r.nextInt(19-i);
-            auxQuestionList.add(questionList.get(aux));
-            questionList.remove(aux);
-            System.out.println("Tamaño lista preguntas : " + questionList.size());
+            auxQuestionList.add(questions.get(aux));
+            questions.remove(aux);
         }
         return auxQuestionList;
     }
 
 
-    public void introIndieQuestions(){
+    public void addQuestions(){
         //en vez de add a la lista, insertarlas a la base de datos
         questionList.add(new Question("indie", R.raw.dorian_1, "Lori Meyers;Dorian;Los Planetas;La habitación roja", "Dorian" ));
         questionList.add(new Question("indie", R.raw.izal_1, "La casa azul;Love of lesbian;IZAL;Niños mutantes", "IZAL" ));
@@ -71,29 +69,26 @@ public class QuestionManager {
         questionList.add(new Question("indie", R.raw.vm_1,"Dorian;IZAL;Sr. Chinarro;Vetusta Morla", "Vetusta Morla" ));
         questionList.add(new Question("indie", R.raw.vm_2, "Lori Meyers;Vetusta Morla;La casa azul;Los punsetes", "Vetusta Morla" ));
         questionList.add(new Question("indie", R.raw.vm_3,"Vetusta Morla;Los Planetas;Viva Suecia;La habitación roja", "Vetusta Morla" ));
-    }
-
-    public void introRockQuestions(){
         questionList.add(new Question("rock", R.raw.boikot_1, "La Pegatina;Boikot;La Raiz;Reincidentes", "Boikot" ));
-        questionList.add(new Question("rock", R.raw.boikot_2, new String[]{"La Raiz", "Boikot", "Porretas", "Extremoduro"}, "Boikot" ));
-        questionList.add(new Question("rock", R.raw.extremoduro_1, new String[]{"Extremoduro", "Boikot", "La Raiz", "Fito y Fitipaldis"}, "Extremoduro" ));
-        questionList.add(new Question("rock", R.raw.extremoduro_2, new String[]{"La Pegatina", "Platero y tu", "Extremoduro", "Reincidentes"}, "Extremoduro" ));
-        questionList.add(new Question("rock", R.raw.lapegatina_1, new String[]{"La Pegatina", "Txarango", "La Raiz", "Bongo Botrako"}, "La Pegatina" ));
-        questionList.add(new Question("rock", R.raw.lapegatina_2, new String[]{"Boikot", "Txarango", "Bongo Botrako", "La Pegatina"}, "La Pegatina" ));
-        questionList.add(new Question("rock", R.raw.lapollarecords_1, new String[]{"La Pegatina", "La Polla Records", "Gatillazo", "Eskorbuto"}, "La Polla Records" ));
-        questionList.add(new Question("rock", R.raw.laraiz_1, new String[]{"La Pegatina", "Zoo", "La Raiz", "Reincidentes"}, "La Raiz" ));
-        questionList.add(new Question("rock", R.raw.laraiz_2, new String[]{"Zoo", "Boikot", "La Raiz", "Reincidentes"}, "La Raiz" ));
-        questionList.add(new Question("rock", R.raw.laraiz_3, new String[]{"La Pegatina", "Zoo", "La Raiz", "Extremoduro"}, "La Raiz" ));
-        questionList.add(new Question("rock", R.raw.lossuaves_1, new String[]{"Extremoduro", "M-Clan", "Los Suaves", "Marea"}, "Los Suaves" ));
-        questionList.add(new Question("rock", R.raw.magodeoz_1, new String[]{"Extremoduro", "Mago de Oz", "La Raiz", "Fito y Fitipaldis"}, "Mago de Oz" ));
-        questionList.add(new Question("rock", R.raw.mojinos_1, new String[]{"La Pegatina", "Platero y tu", "Extremoduro", "Mojinos Escocios"}, "Mojinos Escocios" ));
-        questionList.add(new Question("rock", R.raw.plateroytu_1, new String[]{"Fito y Fitipaldis", "Extremoduro", "Platero y tu", "Extrechinato"}, "Platero y tu" ));
-        questionList.add(new Question("rock", R.raw.porretas_1, new String[]{"Boikot", "Txarango", "Porretas", "Eskorbuto"}, "Porretas" ));
-        questionList.add(new Question("rock", R.raw.reincidentes_1, new String[]{"Marea", "Boikot", "La Raiz", "Reincidentes"}, "Reincidentes" ));
-        questionList.add(new Question("rock", R.raw.reincidentes_2, new String[]{"La Pegatina", "Boikot", "Marea", "Reincidentes"}, "Reincidentes" ));
-        questionList.add(new Question("rock", R.raw.rosendo_1, new String[]{"Rosendo", "Extremoduro", "Marea", "Reincidentes"}, "Rosendo" ));
-        questionList.add(new Question("rock", R.raw.skap_1, new String[]{"Skalarriak", "Boikot", "Skap", "Reincidentes"}, "Skap" ));
-        questionList.add(new Question("rock", R.raw.skap_2, new String[]{"La Polla Records", "Gatillazo", "Skap", "Reincidentes"}, "Skap" ));
+        questionList.add(new Question("rock", R.raw.boikot_2, "La Raiz;Boikot;Porretas;Extremoduro", "Boikot" ));
+        questionList.add(new Question("rock", R.raw.extremoduro_1,"Extremoduro;Boikot;La Raiz;Fito y Fitipaldis", "Extremoduro" ));
+        questionList.add(new Question("rock", R.raw.extremoduro_2, "La Pegatina;Platero y tu;Extremoduro;Reincidentes", "Extremoduro" ));
+        questionList.add(new Question("rock", R.raw.lapegatina_1, "La Pegatina;Txarango;La Raiz;Bongo Botrako", "La Pegatina" ));
+        questionList.add(new Question("rock", R.raw.lapegatina_2, "Boikot;Txarango;Bongo Botrako;La Pegatina", "La Pegatina" ));
+        questionList.add(new Question("rock", R.raw.lapollarecords_1, "La Pegatina;La Polla Records;Gatillazo;Eskorbuto", "La Polla Records" ));
+        questionList.add(new Question("rock", R.raw.laraiz_1, "La Pegatina;Zoo;La Raiz;Reincidentes", "La Raiz" ));
+        questionList.add(new Question("rock", R.raw.laraiz_2, "Zoo;Boikot;La Raiz;Reincidentes", "La Raiz" ));
+        questionList.add(new Question("rock", R.raw.laraiz_3, "La Pegatina;Zoo;La Raiz;Extremoduro", "La Raiz" ));
+        questionList.add(new Question("rock", R.raw.lossuaves_1, "Extremoduro;M-Clan;Los Suaves;Marea", "Los Suaves" ));
+        questionList.add(new Question("rock", R.raw.magodeoz_1, "Extremoduro;Mago de Oz;La Raiz;Fito y Fitipaldis", "Mago de Oz" ));
+        questionList.add(new Question("rock", R.raw.mojinos_1, "La Pegatina;Platero y tu;Extremoduro;Mojinos Escocios", "Mojinos Escocios" ));
+        questionList.add(new Question("rock", R.raw.plateroytu_1, "Fito y Fitipaldis;Extremoduro;Platero y tu;Extrechinato", "Platero y tu" ));
+        questionList.add(new Question("rock", R.raw.porretas_1,"Boikot;Txarango;Porretas;Eskorbuto", "Porretas" ));
+        questionList.add(new Question("rock", R.raw.reincidentes_1, "Marea;Boikot;La Raiz;Reincidentes", "Reincidentes" ));
+        questionList.add(new Question("rock", R.raw.reincidentes_2, "La Pegatina;Boikot;Marea;Reincidentes", "Reincidentes" ));
+        questionList.add(new Question("rock", R.raw.rosendo_1, "Rosendo;Extremoduro;Marea;Reincidentes", "Rosendo" ));
+        questionList.add(new Question("rock", R.raw.skap_1, "Skalarriak;Boikot;Skap;Reincidentes", "Skap" ));
+        questionList.add(new Question("rock", R.raw.skap_2, "La Polla Records;Gatillazo;Skap;Reincidentes", "Skap" ));
     }
 
 }
