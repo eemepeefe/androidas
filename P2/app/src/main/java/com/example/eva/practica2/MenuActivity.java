@@ -13,6 +13,9 @@ public class MenuActivity extends AppCompatActivity {
     private AppDatabase gameDB;
     private UserDao dao;
 
+    private QuestionDatabase questionDB;
+    private QuestionDao questionDao;
+
     private Button buttonJugar;
     private Button buttonConfig;
     private Button buttonScore;
@@ -22,8 +25,9 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        //Creación de la DB
+        //Creación de las DB
         gameDB = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME).build();
+        questionDB = Room.databaseBuilder(getApplicationContext(), QuestionDatabase.class, DATABASE_NAME).build();
 
         buttonJugar = (Button) findViewById(R.id.btnJugar);
         buttonConfig = (Button) findViewById(R.id.btnConfig);

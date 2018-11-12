@@ -1,5 +1,8 @@
 package com.example.eva.practica2;
 
+import android.arch.persistence.room.Room;
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,20 +11,25 @@ public class QuestionManager {
 
     private List<Question> questionList;
 
-    QuestionManager(String category) {
-        System.out.println("Category is: " + category);
-        questionList = new ArrayList<Question>();
+    private List<Integer> resourcesList;
+    private List<String> answersList;
+    private List <String> correctAnswersList;
 
-        if (category.equals("indie")){
-            introIndieQuestions();
+    private QuestionDatabase db;
+    private QuestionDao daoquestion;
 
-        } else if (category.equals("rock")){
-            System.out.println("IGUALES MARI IGUALITOS");
-            introRockQuestions();
+    QuestionManager(Context context) {
+        db = QuestionDatabase.getQuestionDatabase(context);
+        daoquestion = db.questionDao();
+        if(daoquestion.countQuestions()==0){
+            daoquestion.insertAll();
         }
     }
 
-    public List<Question> getQuestions(int numberQuestions) {
+    public List<Question> getQuestionListFromDB(String category){
+        //query para coger la lista de DB y pegarla en la lista de preguntas
+    }
+    public List<Question> getNumberOfQuestions(int numberQuestions) {
         List<Question> auxQuestionList = new ArrayList<Question>();
         for (int i = 0; i<numberQuestions; i++){
             Random r = new Random();
@@ -35,28 +43,28 @@ public class QuestionManager {
 
 
     public void introIndieQuestions(){
-        questionList.add(new Question(0, R.raw.dorian_1, new String[]{"Lori Meyers", "Dorian", "Los Planetas", "La habitación roja"}, "Dorian" ));
-        questionList.add(new Question(1, R.raw.izal_1, new String[]{"La casa azul", "Love of lesbian", "IZAL", "Niños mutantes"}, "IZAL" ));
-        questionList.add(new Question(2, R.raw.izal_2, new String[]{"IZAL", "Viva Suecia", "Supersubmarina", "Los punsetes"}, "IZAL" ));
-        questionList.add(new Question(3, R.raw.izal_3, new String[]{"Dorian", "IZAL", "Lori Meyers", "Love of lesbian"}, "IZAL" ));
-        questionList.add(new Question(4, R.raw.izal_4, new String[]{"Vetusta Morla", "Miss Caffeina", "Triángulo de amor bizarro", "IZAL"}, "IZAL" ));
-        questionList.add(new Question(5, R.raw.izal_5, new String[]{"Interpol", "Supersubmarina", "IZAL", "Sr. Chinarro"}, "IZAL" ));
-        questionList.add(new Question(6, R.raw.lol_1, new String[]{"Love of lesbian", "Los punsetes", "Miss Caffeina", "Lori Meyers"}, "Love of lesbian" ));
-        questionList.add(new Question(7, R.raw.lol_2, new String[]{"Viva Suecia", "La habitación roja", "Love of lesbian", "Vetusta Morla"}, "Love of lesbian" ));
-        questionList.add(new Question(8, R.raw.mc_1, new String[]{"IZAL", "Miss Caffeina", "La casa azul", "Dorian"}, "Miss Caffeina" ));
-        questionList.add(new Question(9, R.raw.mc_2, new String[]{"Interpol", "Miss Caffeina", "Lori Meyers", "Niños mutantes"}, "Miss Caffeina" ));
-        questionList.add(new Question(10, R.raw.mc_3, new String[]{"Lori Meyers", "Dorian", "Niños mutantes", "Miss Caffeina"}, "Miss Caffeina" ));
-        questionList.add(new Question(11, R.raw.mc_4, new String[]{"Sr. Chinarro", "La casa azul", "Miss Caffeina", "Love of lesbian"}, "Miss Caffeina" ));
-        questionList.add(new Question(12, R.raw.mc_5, new String[]{"Miss Caffeina", "Viva Suecia", "Lori Meyers", "IZAL"}, "Miss Caffeina" ));
-        questionList.add(new Question(13, R.raw.ss_1, new String[]{"Love of lesbian", "Supersubmarina", "Triángulo de amor bizarro", "Niños mutantes"}, "Supersubmarina" ));
-        questionList.add(new Question(14, R.raw.ss_2, new String[]{"Supersubmarina", "Interpol", "IZAL", "Love of lesbian"}, "Supersubmarina" ));
-        questionList.add(new Question(15, R.raw.ss_3, new String[]{"Miss Caffeina", "Vetusta Morla", "Supersubmarina", "Lori Meyers"}, "Supersubmarina" ));
-        questionList.add(new Question(16, R.raw.ss_4, new String[]{"Triángulo de amor bizarro", "Los Planetas", "Supersubmarina", "Dorian"}, "Supersubmarina" ));
-        questionList.add(new Question(17, R.raw.vm_1, new String[]{"Dorian", "IZAL", "Sr. Chinarro", "Vetusta Morla"}, "Vetusta Morla" ));
-        questionList.add(new Question(18, R.raw.vm_2, new String[]{"Lori Meyers", "Vetusta Morla", "La casa azul", "Los punsetes"}, "Vetusta Morla" ));
-        questionList.add(new Question(19, R.raw.vm_3, new String[]{"Vetusta Morla", "Los Planetas", "Viva Suecia", "La habitación roja"}, "Vetusta Morla" ));
+        //en vez de add a la lista, insertarlas a la base de datos
+        questionList.add(new Question("indie", R.raw.dorian_1, new String[]{"Lori Meyers", "Dorian", "Los Planetas", "La habitación roja"}, "Dorian" ));
+        questionList.add(new Question("indie", R.raw.izal_1, new String[]{"La casa azul", "Love of lesbian", "IZAL", "Niños mutantes"}, "IZAL" ));
+        questionList.add(new Question("indie", R.raw.izal_2, new String[]{"IZAL", "Viva Suecia", "Supersubmarina", "Los punsetes"}, "IZAL" ));
+        questionList.add(new Question("indie", R.raw.izal_3, new String[]{"Dorian", "IZAL", "Lori Meyers", "Love of lesbian"}, "IZAL" ));
+        questionList.add(new Question("indie", R.raw.izal_4, new String[]{"Vetusta Morla", "Miss Caffeina", "Triángulo de amor bizarro", "IZAL"}, "IZAL" ));
+        questionList.add(new Question("indie", R.raw.izal_5, new String[]{"Interpol", "Supersubmarina", "IZAL", "Sr. Chinarro"}, "IZAL" ));
+        questionList.add(new Question("indie", R.raw.lol_1, new String[]{"Love of lesbian", "Los punsetes", "Miss Caffeina", "Lori Meyers"}, "Love of lesbian" ));
+        questionList.add(new Question("indie", R.raw.lol_2, new String[]{"Viva Suecia", "La habitación roja", "Love of lesbian", "Vetusta Morla"}, "Love of lesbian" ));
+        questionList.add(new Question("indie", R.raw.mc_1, new String[]{"IZAL", "Miss Caffeina", "La casa azul", "Dorian"}, "Miss Caffeina" ));
+        questionList.add(new Question("indie", R.raw.mc_2, new String[]{"Interpol", "Miss Caffeina", "Lori Meyers", "Niños mutantes"}, "Miss Caffeina" ));
+        questionList.add(new Question("indie", R.raw.mc_3, new String[]{"Lori Meyers", "Dorian", "Niños mutantes", "Miss Caffeina"}, "Miss Caffeina" ));
+        questionList.add(new Question("indie", R.raw.mc_4, new String[]{"Sr. Chinarro", "La casa azul", "Miss Caffeina", "Love of lesbian"}, "Miss Caffeina" ));
+        questionList.add(new Question("indie", R.raw.mc_5, new String[]{"Miss Caffeina", "Viva Suecia", "Lori Meyers", "IZAL"}, "Miss Caffeina" ));
+        questionList.add(new Question("indie", R.raw.ss_1, new String[]{"Love of lesbian", "Supersubmarina", "Triángulo de amor bizarro", "Niños mutantes"}, "Supersubmarina" ));
+        questionList.add(new Question("indie", R.raw.ss_2, new String[]{"Supersubmarina", "Interpol", "IZAL", "Love of lesbian"}, "Supersubmarina" ));
+        questionList.add(new Question("indie", R.raw.ss_3, new String[]{"Miss Caffeina", "Vetusta Morla", "Supersubmarina", "Lori Meyers"}, "Supersubmarina" ));
+        questionList.add(new Question("indie", R.raw.ss_4, new String[]{"Triángulo de amor bizarro", "Los Planetas", "Supersubmarina", "Dorian"}, "Supersubmarina" ));
+        questionList.add(new Question("indie", R.raw.vm_1, new String[]{"Dorian", "IZAL", "Sr. Chinarro", "Vetusta Morla"}, "Vetusta Morla" ));
+        questionList.add(new Question("indie", R.raw.vm_2, new String[]{"Lori Meyers", "Vetusta Morla", "La casa azul", "Los punsetes"}, "Vetusta Morla" ));
+        questionList.add(new Question("indie", R.raw.vm_3, new String[]{"Vetusta Morla", "Los Planetas", "Viva Suecia", "La habitación roja"}, "Vetusta Morla" ));
     }
-
 
     public void introRockQuestions(){
         questionList.add(new Question(0, R.raw.boikot_1, new String[]{"La Pegatina", "Boikot", "La Raiz", "Reincidentes"}, "Boikot" ));
@@ -80,4 +88,5 @@ public class QuestionManager {
         questionList.add(new Question(18, R.raw.skap_1, new String[]{"Skalarriak", "Boikot", "Skap", "Reincidentes"}, "Skap" ));
         questionList.add(new Question(19, R.raw.skap_2, new String[]{"La Polla Records", "Gatillazo", "Skap", "Reincidentes"}, "Skap" ));
     }
+
 }

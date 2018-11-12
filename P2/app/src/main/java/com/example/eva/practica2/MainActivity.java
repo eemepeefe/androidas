@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
             //Opciones de la partida desde la bd y datos necesarios para la misma
             System.out.println("Tu usuario es " + player_settings.getUsername());
-            questionManager = new QuestionManager(player_settings.getCategory());
+            questionManager = new QuestionManager(this);
             //questionManager.SaberSiHagoBienLasCosas();
             questions = questionManager.getQuestions(player_settings.getDifficulty());
             numQuestions = questions.size();
