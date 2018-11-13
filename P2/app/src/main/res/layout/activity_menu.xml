@@ -8,21 +8,22 @@
     tools:context=".MenuActivity">
 
     <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="350dp"
+        android:layout_height="280dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="120dp"
-        android:src="@drawable/music_icon" />
+        android:layout_marginStart="35dp"
+
+        android:layout_marginEnd="41dp"
+        android:src="@drawable/background_menu"/>
 
 <RelativeLayout
 
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="50dp"
+    android:layout_marginTop="260dp"
     android:layout_marginRight="50dp">
 
 
@@ -32,7 +33,7 @@
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="200dp"
+        android:alpha="0.9"
         android:background="@drawable/boton"
         android:padding="8dp"
         android:text="Jugar"
@@ -45,9 +46,10 @@
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="314dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/boton"
         android:padding="8dp"
+        android:alpha="0.9"
         android:text="Configuración"
         android:textColor="@drawable/txt_boton"
         android:textSize="30sp" />
@@ -58,9 +60,10 @@
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="425dp"
+        android:layout_marginTop="240dp"
         android:background="@drawable/boton"
         android:padding="8dp"
+        android:alpha="0.9"
         android:text="Puntuaciones"
         android:textColor="@drawable/txt_boton"
         android:textSize="30sp" />

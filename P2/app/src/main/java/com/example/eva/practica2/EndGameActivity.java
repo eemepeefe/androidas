@@ -19,18 +19,21 @@ public class EndGameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Aquí imprimimos por pantalla el resultado final de la partida y el tiempo que se
+        //ha tardado en llevarla a cabo
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_game);
 
         veganfont = Typeface.createFromAsset(getAssets(),  "fonts/timeburnerbold.ttf");
-
         verpuntuacionfinal = (TextView) findViewById(R.id.aciertosfallosendgame);
         verpuntuacionfinal.setTypeface(veganfont);
         gobacktomenu = (Button) findViewById(R.id.backtomenufromendgame);
         gobacktomenu.setTypeface(veganfont);
 
         Bundle bundle = this.getIntent().getExtras();
-        verpuntuacionfinal.setText("Aciertos: " + bundle.getInt("ACIERTOS") + " Fallos: " + bundle.getInt("FALLOS"));
+        verpuntuacionfinal.setText("Aciertos: " + bundle.getInt("ACIERTOS") + ", Fallos: " + bundle.getInt("FALLOS") + "\n Tiempo: " + bundle.getFloat("TIEMPO") + "s");
 
         gobacktomenu.setOnClickListener(new View.OnClickListener() {
             @Override

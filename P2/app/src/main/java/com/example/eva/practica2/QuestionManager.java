@@ -7,13 +7,16 @@ import java.util.Random;
 
 public class QuestionManager {
 
+    //Clase en la que se introducen las preguntas en DB si no están ya introducidas
+    //y se gestiona lo referente a las listas de preguntas
+
+
     private List<Question> questionList;
-
     private List<Question> questions;
-
     private QuestionDatabase db;
     private QuestionDao daoquestion;
 
+    //El constructor introduce las preguntas en db
     QuestionManager(Context context) {
         db = QuestionDatabase.getQuestionDatabase(context);
         daoquestion = db.questionDao();
@@ -26,11 +29,15 @@ public class QuestionManager {
         }
     }
 
+    //Este método inicializa el array de preguntas atributo de la clase
+    //con las preguntas de la temática deseada
     public void getQuestionsByTheme(String category){
         questions = new ArrayList<>();
         questions = daoquestion.getQuestions(category);
     }
 
+    //Este método devuelve un número aleatorio de preguntas, en función
+    //de la configuración del usuario
     public List<Question> getNumberOfQuestions(int numberQuestions) {
         List<Question> auxQuestionList = new ArrayList<Question>();
         for (int i = 0; i<numberQuestions; i++){
@@ -42,7 +49,7 @@ public class QuestionManager {
         return auxQuestionList;
     }
 
-
+    //Método auxiliar para insertar preguntas en la DB
     public void addQuestions(){
         //en vez de add a la lista, insertarlas a la base de datos
         questionList.add(new Question("indie", R.raw.dorian_1, "Lori Meyers;Dorian;Los Planetas;La habitación roja", "Dorian" ));

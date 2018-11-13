@@ -24,31 +24,33 @@
 
     <TextView
         android:id="@+id/aciertosfallosendgame"
-        android:layout_width="247dp"
-        android:layout_height="86dp"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="200dp"
-        android:text="Aciertos:  Fallos:"
-        android:textColor="@android:color/white"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="171dp"
         android:shadowColor="@android:color/black"
         android:shadowDy="2"
         android:shadowRadius="4"
+        android:text="Aciertos:  Fallos:"
+        android:textColor="@android:color/white"
         android:textSize="30sp" />
 
     <Button
         android:id="@+id/backtomenufromendgame"
         android:layout_width="190dp"
         android:layout_height="127dp"
+        android:alpha="0.9"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="108dp"
         android:layout_marginRight="86dp"
-        android:layout_marginBottom="153dp"
+        android:layout_marginBottom="82dp"
         android:background="@drawable/boton"
         android:text="Volver al menú"
-        android:textColor="@drawable/txt_boton" />
+        android:textColor="@drawable/txt_boton"
+        android:textSize="25sp" />
 
     </RelativeLayout>

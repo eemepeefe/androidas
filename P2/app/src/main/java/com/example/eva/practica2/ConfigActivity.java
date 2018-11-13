@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Random;
 
 
 public class ConfigActivity extends AppCompatActivity {
@@ -25,7 +26,7 @@ public class ConfigActivity extends AppCompatActivity {
     private Button btnAtras;
     private Button buttonIndie;
     private Button buttonRock;
-    private RadioGroup botonera;
+
     private RadioButton boton1;
     private RadioButton boton2;
     private RadioButton boton3;
@@ -38,6 +39,12 @@ public class ConfigActivity extends AppCompatActivity {
     private TextView elegirpreguntas;
     private TextView elegirtematica;
 
+    ///////////////////////////////////////////////////////////
+    /////////////// En esta clase se rellena la información necesaria para jugar una partida:
+    /////////////// nombre de usuario, número de preguntas y temática
+    /////////////// Si se dejase todo vacío y se pulsase guardar, se iniciaría
+    /////////////// con una configuración por defecto: user anónimo, 10 preguntas de rock
+    ///////////////////////////////////////////////////////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,21 +52,34 @@ public class ConfigActivity extends AppCompatActivity {
         db  = AppDatabase.getAppDatabase(this);
         dao = db.userDao();
         veganfont = Typeface.createFromAsset(getAssets(),  "fonts/timeburnerbold.ttf");
-        //SI EN ESTA PANTALLA NO SE HA METIDO NADA, HAY QUE AVISAR AL USUARIO CUANDO LE DA A JUGAR
 
+        //Vistas de texto y botones necesarios
         elegirnombre = (TextView)findViewById(R.id.introducenombre);
         elegirpreguntas = (TextView)findViewById(R.id.numeropreguntas);
         elegirtematica = (TextView)findViewById(R.id.eligetematica);
         elegirnombre.setTypeface(veganfont);
         elegirpreguntas.setTypeface(veganfont);
         elegirtematica.setTypeface(veganfont);
-
         boton1 = (RadioButton)findViewById(R.id.fivequestions);
         boton1.setTypeface(veganfont);
         boton2 = (RadioButton)findViewById(R.id.tenquestions);
         boton2.setTypeface(veganfont);
         boton3 = (RadioButton)findViewById(R.id.tenquestions);
         boton3.setTypeface(veganfont);
+        texto = (EditText) findViewById(R.id.plain_text_input);
+        texto.setTypeface(veganfont);
+        buttonIndie = (Button) findViewById(R.id.indie);
+        buttonIndie.setTypeface(veganfont);
+        buttonRock = (Button) findViewById(R.id.rock);
+        buttonRock.setTypeface(veganfont);
+        btnConfirmar = (Button) findViewById(R.id.confirm);
+        btnConfirmar.setTypeface(veganfont);
+        btnAtras = (Button)findViewById(R.id.backtomenu);
+        btnAtras.setTypeface(veganfont);
+
+        //Valores por defecto por si se pulsara a guardar sin pulsar todos los botones necesarios
+        difficulty = 10;
+        category = "rock";
 
         View.OnClickListener list = new View.OnClickListener() {
             @Override
@@ -84,14 +104,6 @@ public class ConfigActivity extends AppCompatActivity {
         boton2.setOnClickListener(list);
         boton3.setOnClickListener(list);
 
-        texto = (EditText) findViewById(R.id.plain_text_input);
-        texto.setTypeface(veganfont);
-
-        buttonIndie = (Button) findViewById(R.id.indie);
-        buttonIndie.setTypeface(veganfont);
-        buttonRock = (Button) findViewById(R.id.rock);
-        buttonRock.setTypeface(veganfont);
-
         buttonIndie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,30 +118,29 @@ public class ConfigActivity extends AppCompatActivity {
             }
         });
 
-        btnConfirmar = (Button) findViewById(R.id.confirm);
-        btnConfirmar.setTypeface(veganfont);
-        btnAtras = (Button)findViewById(R.id.backtomenu);
-        btnAtras.setTypeface(veganfont);
-
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //Con todos los datos insertados, se añade el usuario a la base de datos
+
                 String username = texto.getText().toString();
                 User user = new User();
-                user.setUsername(username);
+                if (!username.equals("")){
+                    user.setUsername(username);
+                } else {
+                    Random rnd = new Random();
+                    int useraux = (int) rnd.nextInt(1000);
+                    String useranon = "anon"+useraux;
+                    System.out.println(useranon);
+                    user.setUsername(useranon);
+                }
                 user.setScore(-1);
                 user.setDifficulty(difficulty);
                 user.setCategory(category);
                 dao.insertAll(user);
 
-                List<User> totalUsers = dao.getAll();
-                for (int i =0; i<totalUsers.size();i++){
-                    System.out.println(totalUsers.get(i).getId());
-                    System.out.println(totalUsers.get(i).getUsername());
-                    System.out.println(totalUsers.get(i).getDifficulty());
-                    System.out.println(totalUsers.get(i).getCategory());
-                }
+
             }
         });
 

@@ -67,23 +67,26 @@ public class MainActivity extends AppCompatActivity {
         db  = AppDatabase.getAppDatabase(this);
         dao = db.userDao();
 
+        //Buscar al último usuario insertado para obtener la configuración pertinente
         player_settings = dao.getLastUser();
+
+        //Si la base de datos está vacía o no se ha insertado una configuración
+        //el programa nos permite volver a la configuración o continuar como anónimo
+        //mediante la aparición de un pop-up
 
         if(player_settings==null || (player_settings.getScore()!=-1) ){
 
-            //if no se ha creado config
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                     MainActivity.this);
 
-            // set title
             alertDialogBuilder.setTitle("No se ha introducido configuración.");
 
-            // set dialog message
             alertDialogBuilder
                     .setMessage("¿Deseas continuar como anónimo con configuración estándar (10 preguntas, categoría aleatoria) o volver al menú?")
                     .setCancelable(false)
                     .setPositiveButton("Continuar como anónimo",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int id) {
+                            //Se inserta un nuevo usuario con el username anon+número random
                             Random rnd = new Random();
                             int useraux = (int) rnd.nextInt(1000);
                             String username = "anon"+useraux;
@@ -98,28 +101,23 @@ public class MainActivity extends AppCompatActivity {
                                 user.setCategory("indie");
                             dao.insertAll(user);
                             player_settings = dao.getLastUser();
+
                         }
                     })
                     .setNegativeButton("Volver a configuración",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int id) {
+                            //Se vuelve a la configuración
                             Intent intent = new Intent(MainActivity.this, ConfigActivity.class);
                             startActivity(intent);
                         }
                     });
 
-            // create alert dialog
             AlertDialog alertDialog = alertDialogBuilder.create();
-
-            // show it
             alertDialog.show();
         }
 
 
-
-        //le doy a elegir a continuar como anon o volver atrás o sea que me falta aquí un pop up o algo de eso
-        //si continuo como anon inserto un anon+numero random en la bd
-
-        //Inicializacion botones y otros
+        //Cada uno de los textos, botones etc con su correspondiente fuente
         buttonPlay = (Button) findViewById(R.id.playbutton);
         buttonPlay.setTypeface(veganfont);
         buttonPause = (Button) findViewById(R.id.pausebutton);
@@ -140,32 +138,39 @@ public class MainActivity extends AppCompatActivity {
         aciertosfallos.setTypeface(veganfont);
         adivinapreguntas = (TextView) findViewById(R.id.titulo);
         adivinapreguntas.setTypeface(veganfont);
+
+        //Cronómetro
         chronometer = (Chronometer) findViewById(R.id.chronometer);
         chronometer.setTypeface(veganfont);
 
+
+        //Si se ha conseguido obtener finalmente una configuración válida, se comienza la partida
         if(player_settings!=null) {
 
-            //Opciones de la partida desde la bd y datos necesarios para la misma
-            System.out.println("Tu usuario es " + player_settings.getUsername());
+            //Opciones de la partida desde la bd y datos necesarios para la misma:
+            //elección del conjunto de preguntas y cambio del background en función del tipo de las mismas
             questionManager = new QuestionManager(this);
-            questionManager.getQuestionsByTheme( player_settings.getCategory());
-
+            questionManager.getQuestionsByTheme(player_settings.getCategory()); //selección del tema
             if(player_settings.getCategory().equals("indie")){
                 mainBackground.setBackgroundResource(R.drawable.indie_music);
             } else if (player_settings.getCategory().equals("rock")){
                 mainBackground.setBackgroundResource(R.drawable.rock_music);
             }
 
-            questions = questionManager.getNumberOfQuestions(player_settings.getDifficulty());
+            questions = questionManager.getNumberOfQuestions(player_settings.getDifficulty()); //selección del número de preguntas deseado del tema deseado
             numQuestions = questions.size();
             questionIndex = 0;
             aciertos = 0;
 
+            //Comienzo del juego
             siguientePregunta();
 
             chronometer.start();
 
-            //Botones para el audio
+            //////////////////////////////////////
+            /////////////    Botones para el audio
+            ///////////////////////////////////////
+
             buttonPlay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -197,7 +202,10 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-            //Botones respuesta
+            /////////////////////////////////
+            ////////////// Botones para las respuestas
+            /////////////////////////////////
+
             answer1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -265,9 +273,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //Método que permite cambiar el audio y el texto de los botones para cada pregunta
+
     private void siguientePregunta(){
         if (questionIndex < numQuestions){
-
             updateViews();
             mediaPlayer = MediaPlayer.create(MainActivity.this, questions.get(questionIndex).getQuestionRoute());
             String[] splittedAnswers = questions.get(questionIndex).splitAnswers();
@@ -280,8 +289,11 @@ public class MainActivity extends AppCompatActivity {
             questionIndex++;
 
         } else {
+            //Si se han terminado las preguntas, se detiene el cronómetro, se guarda la puntuación
+            //en la base de datos y se envía dicha puntuación a la actividad end game
+
             chronometer.stop();
-            long time = chronometer.getBase();
+            long time = (SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000; //tiempo en segundos
             System.out.println(time);
             Intent intent = new Intent(MainActivity.this, EndGameActivity.class);
             float scoreaux = (float)aciertos/numQuestions;
@@ -289,15 +301,18 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(scoreaux);
             dao.setScore(player_settings.getId(), (int)scoreaux);
             //Mandar aciertos y fallos en el intent a la siguiente actividad
+            // (FALTA FÓRMULA DISTINTA PARA LA PUNTUACIÓN)
             Bundle bundle = new Bundle();
             bundle.putInt("ACIERTOS", aciertos);
             bundle.putInt("FALLOS", fallos);
+            bundle.putFloat("TIEMPO", time);
             intent.putExtras(bundle);
             startActivity(intent);
         }
     }
 
-
+    //Método que actualiza las vistas del número de pregunta actual respecto al total
+    //y del número de aciertos y fallos
     private void updateViews(){
         totalpreguntas.setText("Pregunta actual: " + questionIndex + " / " + " de " + numQuestions);
         aciertosfallos.setText("Aciertos: " + aciertos + "  Fallos: " + fallos);

@@ -30,10 +30,12 @@ public class MenuActivity extends AppCompatActivity {
 
         veganfont = Typeface.createFromAsset(getAssets(),  "fonts/timeburnerbold.ttf");
 
-        //Creación de las DB
+        //Creación de las DB: una para usuarios y otra para preguntas
+
         gameDB = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME).build();
         questionDB = Room.databaseBuilder(getApplicationContext(), QuestionDatabase.class, DATABASE_NAME).build();
 
+        //Botones
         buttonJugar = (Button) findViewById(R.id.btnJugar);
         buttonJugar.setTypeface(veganfont);
         buttonConfig = (Button) findViewById(R.id.btnConfig);
@@ -41,7 +43,6 @@ public class MenuActivity extends AppCompatActivity {
         buttonScore = (Button) findViewById(R.id.btnScore);
         buttonScore.setTypeface(veganfont);
 
-        //Botones
         buttonJugar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
