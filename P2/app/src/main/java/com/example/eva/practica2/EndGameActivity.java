@@ -13,6 +13,8 @@ import org.w3c.dom.Text;
 public class EndGameActivity extends AppCompatActivity {
 
     private TextView verpuntuacionfinal;
+    private TextView partidafinalizada;
+
     private Button gobacktomenu;
 
     private Typeface veganfont;
@@ -29,6 +31,8 @@ public class EndGameActivity extends AppCompatActivity {
         veganfont = Typeface.createFromAsset(getAssets(),  "fonts/timeburnerbold.ttf");
         verpuntuacionfinal = (TextView) findViewById(R.id.aciertosfallosendgame);
         verpuntuacionfinal.setTypeface(veganfont);
+        partidafinalizada = (TextView) findViewById(R.id.partidafinalizada);
+        partidafinalizada.setTypeface(veganfont);
         gobacktomenu = (Button) findViewById(R.id.backtomenufromendgame);
         gobacktomenu.setTypeface(veganfont);
 
