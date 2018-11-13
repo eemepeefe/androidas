@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         db  = AppDatabase.getAppDatabase(this);
         dao = db.userDao();
 
+
         //Buscar al último usuario insertado para obtener la configuración pertinente
         player_settings = dao.getLastUser();
 
@@ -275,6 +276,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Método que permite cambiar el audio y el texto de los botones para cada pregunta
 
+    long time;
+
     private void siguientePregunta(){
         if (questionIndex < numQuestions){
             updateViews();
@@ -291,15 +294,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             //Si se han terminado las preguntas, se detiene el cronómetro, se guarda la puntuación
             //en la base de datos y se envía dicha puntuación a la actividad end game
-
             chronometer.stop();
-            long time = (SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000; //tiempo en segundos
-            System.out.println(time);
+            time = (SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000; //tiempo en segundos
             Intent intent = new Intent(MainActivity.this, EndGameActivity.class);
-            float scoreaux = (float)aciertos/numQuestions;
-            scoreaux=scoreaux*100;
-            System.out.println(scoreaux);
-            dao.setScore(player_settings.getId(), (int)scoreaux);
+            float score = calculateScore();
+            dao.setScore(player_settings.getId(), (int)score);
             //Mandar aciertos y fallos en el intent a la siguiente actividad
             // (FALTA FÓRMULA DISTINTA PARA LA PUNTUACIÓN)
             Bundle bundle = new Bundle();
@@ -316,5 +315,21 @@ public class MainActivity extends AppCompatActivity {
     private void updateViews(){
         totalpreguntas.setText("Pregunta actual: " + questionIndex + " / " + " de " + numQuestions);
         aciertosfallos.setText("Aciertos: " + aciertos + "  Fallos: " + fallos);
+    }
+
+    //Método para calcular score en función de tiempo, aciertos y total de preguntas
+    private float calculateScore() {
+        float tiempoporpregunta = (float) time/numQuestions;
+        float normalizedtime = normalize (tiempoporpregunta, 2, 10);
+        float scoreaux = (float)aciertos/numQuestions;
+        scoreaux=(scoreaux*normalizedtime) * 100;
+        return scoreaux;
+
+    }
+
+    //Método auxiliar para normalizar tiempo/numero de preguntas y obtener la proporción
+    //que hemos tardado en finalizar
+    private float normalize(float value, float min, float max) {
+        return 1 - ((value - min) / (max - min));
     }
 }
