@@ -8,10 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.Space;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import dadm.scaffold.BaseFragment;
 import dadm.scaffold.R;
@@ -26,10 +23,9 @@ import dadm.scaffold.space.SpaceShipPlayer;
 
 
 public class GameFragment extends BaseFragment implements View.OnClickListener {
+
     private GameEngine theGameEngine;
-
     public TextView livesandscore;
-
 
     public GameFragment() {
     }
@@ -45,7 +41,6 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.btn_play_pause).setOnClickListener(this);
-        //view.findViewById(R.id.livesandscore);
         final ViewTreeObserver observer = view.getViewTreeObserver();
         observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
             @Override
@@ -59,16 +54,15 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
                 theGameEngine.addGameObject(
                         new ParallaxBackground(theGameEngine, 40,
                                 R.drawable.descarga));
-                theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine));
+                theGameEngine.addGameObject(new SpaceShipPlayer(theGameEngine, getArguments().getInt("ship")));
                 theGameEngine.addGameObject(new FramesPerSecondCounter(theGameEngine));
                 theGameEngine.addGameObject(new GameController(theGameEngine));
                 theGameEngine.startGame();
-                setScoreAndLives();
             }
         });
 
-
     }
+
 
     @Override
     public void onClick(View v) {
@@ -101,34 +95,35 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void pauseGameAndShowPauseDialog() {
-        theGameEngine.pauseGame();
-        new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.pause_dialog_title)
-                .setMessage(R.string.pause_dialog_message)
-                .setPositiveButton(R.string.resume, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        theGameEngine.resumeGame();
-                    }
-                })
-                .setNegativeButton(R.string.stop, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        theGameEngine.stopGame();
-                        ((ScaffoldActivity)getActivity()).navigateBack();
-                    }
-                })
-                .setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        theGameEngine.resumeGame();
-                    }
-                })
-                .create()
-                .show();
-
+        if(theGameEngine.isPausedAvailable) {
+            theGameEngine.pauseGame();
+            new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.pause_dialog_title)
+                    .setMessage(R.string.pause_dialog_message)
+                    .setPositiveButton(R.string.resume, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            theGameEngine.resumeGame();
+                        }
+                    })
+                    .setNegativeButton(R.string.stop, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            theGameEngine.stopGame();
+                            ((ScaffoldActivity) getActivity()).navigateBack();
+                        }
+                    })
+                    .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            theGameEngine.resumeGame();
+                        }
+                    })
+                    .create()
+                    .show();
+        }
     }
 
     private void playOrPause() {
@@ -143,9 +138,14 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
         }
     }
 
-    private void setScoreAndLives(){
-        TextView livesandscore = (TextView) getView().findViewById(R.id.livesandscore);
-        int[] scoreAndLives = theGameEngine.returnScoreAndLives();
-        livesandscore.setText("Lives: " + scoreAndLives[1] + "  Score: " + scoreAndLives[0]);
+    public void setScoreAndLives(final int[] aux){
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView livesandscore = (TextView) getView().findViewById(R.id.livesandscore);
+                livesandscore.setText("Lives: " + aux[1] + "  Score: " + aux[0]);
+            }
+        });
+
     }
 }

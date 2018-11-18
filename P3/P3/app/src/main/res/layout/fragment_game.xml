@@ -29,7 +29,7 @@
         android:layout_marginLeft="16dp"
         android:id="@+id/livesandscore"
         android:textSize="30dp"
-        android:text="Lives:   Score: "
+        android:text="Lives: 3 Score: 0"
         />
 
     <include layout="@layout/view_joystick"/>

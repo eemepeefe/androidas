@@ -12,32 +12,43 @@ import dadm.scaffold.BaseFragment;
 import dadm.scaffold.R;
 import dadm.scaffold.ScaffoldActivity;
 
-
-public class MainMenuFragment extends BaseFragment implements View.OnClickListener {
-    public MainMenuFragment() {
+public class ConfigFragment extends BaseFragment implements View.OnClickListener {
+    public ConfigFragment() {
     }
+
+    private int ship;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main_menu, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_config, container, false);
+        ship = R.drawable.ship;
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.btn_start).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.respuesta1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((ScaffoldActivity)getActivity()).startGame();
+                ship = R.drawable.spaceship_2;
+                ((ScaffoldActivity)getActivity()).setShip(ship);
             }
         });
 
-        view.findViewById(R.id.btn_config).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.respuesta2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((ScaffoldActivity)getActivity()).startConfig();
+                ship = R.drawable.spaceship_3;
+                ((ScaffoldActivity)getActivity()).setShip(ship);
+            }
+        });
+
+        view.findViewById(R.id.backtomenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((ScaffoldActivity)getActivity()).backToMenu();
             }
         });
     }

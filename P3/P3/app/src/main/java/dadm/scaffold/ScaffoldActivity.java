@@ -1,16 +1,24 @@
 package dadm.scaffold;
 
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import dadm.scaffold.counter.ConfigFragment;
 import dadm.scaffold.counter.GameFragment;
 import dadm.scaffold.counter.MainMenuFragment;
 
 public class ScaffoldActivity extends AppCompatActivity {
 
     private static final String TAG_FRAGMENT = "content";
+
+    private BaseFragment actualFragment;
+
+    private int score;
+
+    private int ship;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +29,54 @@ public class ScaffoldActivity extends AppCompatActivity {
                     .add(R.id.container, new MainMenuFragment(), TAG_FRAGMENT)
                     .commit();
         }
+        ship = R.drawable.ship;
     }
 
     public void startGame() {
         // Navigate the the game fragment, which makes the start automatically
-        navigateToFragment( new GameFragment());
+        Bundle bundle = new Bundle();
+        bundle.putInt("ship", ship);
+        actualFragment = new GameFragment();
+        actualFragment.setArguments(bundle);
+        navigateToFragment(actualFragment);
+
+    }
+
+    public void startConfig() {
+        // Navigate the the game fragment, which makes the start automatically
+        actualFragment = new ConfigFragment();
+        navigateToFragment(actualFragment);
+    }
+
+    public void backToMenu() {
+        // Navigate the the game fragment, which makes the start automatically
+        actualFragment = new MainMenuFragment();
+        navigateToFragment(actualFragment);
+    }
+
+    public void setShip(int ship){
+        this.ship = ship;
+    }
+
+    public int getShip(){
+        return ship;
+    }
+
+    public void endGame() {
+        // Navigate the the game fragment, which makes the start automatically
+        Bundle bundle = new Bundle();
+        bundle.putInt("score", score);
+        actualFragment = new EndGameFragment();
+        actualFragment.setArguments(bundle);
+        navigateToFragment(actualFragment);
+    }
+
+    public void updateLivesandScore(int[] lives){
+        ((GameFragment)actualFragment).setScoreAndLives(lives);
+    }
+
+    public void sendScore(int score){
+        this.score = score;
     }
 
     private void navigateToFragment(BaseFragment dst) {
@@ -48,6 +99,8 @@ public class ScaffoldActivity extends AppCompatActivity {
         // Do a push on the navigation history
         super.onBackPressed();
     }
+
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

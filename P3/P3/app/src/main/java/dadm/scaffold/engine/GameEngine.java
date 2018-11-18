@@ -10,6 +10,8 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import dadm.scaffold.EndGameFragment;
+import dadm.scaffold.ScaffoldActivity;
 import dadm.scaffold.input.InputController;
 import dadm.scaffold.space.SpaceShipPlayer;
 
@@ -32,11 +34,12 @@ public class GameEngine {
     private int lives;
     private int score;
 
+    public boolean isPausedAvailable;
+
     private Activity mainActivity;
 
     public GameEngine(Activity activity, GameView gameView) {
         mainActivity = activity;
-
         theGameView = gameView;
         theGameView.setGameObjects(this.gameObjects);
         this.width = theGameView.getWidth()
@@ -48,7 +51,7 @@ public class GameEngine {
 
         this.lives = 3;
         this.score = 0;
-
+        isPausedAvailable = true;
     }
 
     public void setTheInputController(InputController inputController) {
@@ -84,10 +87,10 @@ public class GameEngine {
     }
 
     public void pauseGame() {
-        if (theUpdateThread != null) {
+        if (theUpdateThread != null && isPausedAvailable) {
             theUpdateThread.pauseGame();
         }
-        if (theDrawThread != null) {
+        if (theDrawThread != null  && isPausedAvailable) {
             theDrawThread.pauseGame();
         }
     }
@@ -182,17 +185,27 @@ public class GameEngine {
     public void removeLife(){
         if (lives > 0){
             lives--;
+            System.out.println("LIVES: " + lives);
+            ((ScaffoldActivity)mainActivity).updateLivesandScore(returnScoreAndLives());
         } else if (lives == 0){
-            System.out.println("GAME OVEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRR");
+            isPausedAvailable = false;
+            ((ScaffoldActivity)mainActivity).sendScore(score);
+            ((ScaffoldActivity)mainActivity).endGame();
         }
     }
 
     public void addScore(){
         score=score+10;
+        ((ScaffoldActivity)mainActivity).updateLivesandScore(returnScoreAndLives());
     }
 
     public int[] returnScoreAndLives(){
         int[] aux = {score, lives};
         return aux;
+    }
+
+    public int getDrawable(){
+        int drawable = ((ScaffoldActivity)mainActivity).getShip();
+        return drawable;
     }
 }
