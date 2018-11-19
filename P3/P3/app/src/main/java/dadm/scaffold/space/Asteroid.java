@@ -19,7 +19,7 @@ public class Asteroid extends Sprite {
 
     public Asteroid(GameController gameController, GameEngine
             gameEngine) {
-        super(gameEngine, R.drawable.robot
+        super(gameEngine, R.drawable.snake
                 );
         mSpeed = 200d*pixelFactor/1000d;
         mController = gameController;

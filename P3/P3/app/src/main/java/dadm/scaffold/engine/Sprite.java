@@ -47,6 +47,7 @@ public abstract class Sprite extends ScreenGameObject {
                 || positionX < -imageHeight) {
             return;
         }
+        /*
         if (mX > canvas.getWidth() || mY > canvas.getHeight()
                 || mX < -mWidth || mY < -mHeight) {
             return;
@@ -54,7 +55,7 @@ public abstract class Sprite extends ScreenGameObject {
 
         paint.setColor(Color.YELLOW);
         canvas.drawRect(mBoundingRect, paint);
-
+*/
         matrix.reset();
         matrix.postScale((float) pixelFactor, (float) pixelFactor);
         matrix.postTranslate((float) positionX, (float) positionY);

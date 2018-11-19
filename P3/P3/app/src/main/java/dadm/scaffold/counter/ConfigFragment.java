@@ -22,7 +22,7 @@ public class ConfigFragment extends BaseFragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_config, container, false);
-        ship = R.drawable.ship;
+        ship = R.drawable.ufo1;
         return rootView;
     }
 
@@ -32,7 +32,7 @@ public class ConfigFragment extends BaseFragment implements View.OnClickListener
         view.findViewById(R.id.respuesta1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ship = R.drawable.spaceship_2;
+                ship = R.drawable.ufo2;
                 ((ScaffoldActivity)getActivity()).setShip(ship);
             }
         });
@@ -40,7 +40,7 @@ public class ConfigFragment extends BaseFragment implements View.OnClickListener
         view.findViewById(R.id.respuesta2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ship = R.drawable.spaceship_3;
+                ship = R.drawable.ufo3;
                 ((ScaffoldActivity)getActivity()).setShip(ship);
             }
         });
@@ -48,6 +48,7 @@ public class ConfigFragment extends BaseFragment implements View.OnClickListener
         view.findViewById(R.id.backtomenu).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((ScaffoldActivity)getActivity()).setShip(ship);
                 ((ScaffoldActivity)getActivity()).backToMenu();
             }
         });
