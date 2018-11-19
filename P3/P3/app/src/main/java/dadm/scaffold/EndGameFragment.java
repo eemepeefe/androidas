@@ -31,12 +31,17 @@ public class EndGameFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.back_to_menu).setOnClickListener(this);
-    }
+        view.findViewById(R.id.back_to_menu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    ((ScaffoldActivity)getActivity()).backToMenu();
+            }
+        }); }
+
 
     @Override
-    public void onClick(View v) {
-        ((ScaffoldActivity)getActivity()).backToMenu();
+    public void onClick(View v){
     }
 
     }

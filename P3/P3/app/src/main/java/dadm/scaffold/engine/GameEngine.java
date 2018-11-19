@@ -51,7 +51,7 @@ public class GameEngine {
 
         this.lives = 3;
         this.score = 0;
-        isPausedAvailable = true;
+        isPausedAvailable = false;
     }
 
     public void setTheInputController(InputController inputController) {
@@ -75,6 +75,8 @@ public class GameEngine {
         // Start the drawing thread
         theDrawThread = new DrawThread(this);
         theDrawThread.start();
+
+        isPausedAvailable = true;
     }
 
     public void stopGame() {
@@ -174,6 +176,7 @@ public class GameEngine {
         }
     }
 
+    /*
     public void addCollisionable(GameObject object){
         mCollisionableObjects.add((ScreenGameObject) object);
     }
@@ -181,6 +184,7 @@ public class GameEngine {
     public void removeCollisionable(GameObject object){
         mCollisionableObjects.remove((ScreenGameObject) object);
     }
+*/
 
     public void removeLife(){
         if (lives > 0){
@@ -189,8 +193,9 @@ public class GameEngine {
             ((ScaffoldActivity)mainActivity).updateLivesandScore(returnScoreAndLives());
         } else if (lives == 0){
             isPausedAvailable = false;
+            ((ScaffoldActivity)mainActivity).stopGame(this);
             ((ScaffoldActivity)mainActivity).sendScore(score);
-            ((ScaffoldActivity)mainActivity).endGame();
+            ((ScaffoldActivity)mainActivity).endGame(this);
         }
     }
 
