@@ -1,6 +1,4 @@
-Pantalla de configuración en la que elegir tipo de nave: falta poner naves en los botones
-y asignarlas en el gamefragment
-
-Configurar disparo normal como disparo continuo y poner disparo adicional en el botón de disparo
-
-Diseño completo 
+Cambiar naves nuevas en el menu 
+meter sonido
+retocar disparos y enemigos
+memoria
