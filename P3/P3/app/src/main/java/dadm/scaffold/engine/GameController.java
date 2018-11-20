@@ -9,22 +9,25 @@ import dadm.scaffold.space.Asteroid;
 
 public class GameController extends GameObject {
     List<Asteroid> mAsteroidPool = new ArrayList<Asteroid>();
-    private final int TIME_BETWEEN_ENEMIES = 500; //miliseconds
+    private final int TIME_BETWEEN_ENEMIES = 600; //miliseconds
     private int mEnemiesSpawned;
     private long mCurrentMillis;
 
 
     public GameController(GameEngine engine){
         mCurrentMillis = 0;
-        mEnemiesSpawned = 20;
+        mEnemiesSpawned = 5;
         for (int i=0; i<mEnemiesSpawned; i++) {
+            mAsteroidPool.add(new Asteroid(this,engine ));
             mAsteroidPool.add(new Asteroid(this,engine ));
         }
     }
+
     @Override
     public void startGame() {
 
     }
+
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
         mCurrentMillis += elapsedMillis;

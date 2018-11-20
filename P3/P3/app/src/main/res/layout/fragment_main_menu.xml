@@ -4,6 +4,17 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_main"
     >
+    <TextView
+        android:layout_width="700dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="70dp"
+        android:text="¡Destruye todas las serpientes que puedas en 30 segundos!"
+        android:fontFamily="@font/magical"
+        android:textColor="#FFFFFF"
+        android:textSize="40dp"
+        />
     <Button
         android:id="@+id/btn_start"
 
@@ -19,10 +30,10 @@
         android:shadowDy="0"
         android:shadowRadius="5"
         android:layout_gravity="center"
+        android:layout_marginTop="50dp"
         />
     <Button
         android:id="@+id/btn_config"
-
         android:text="Config"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
@@ -35,8 +46,9 @@
         android:shadowDy="0"
         android:shadowRadius="5"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="130dp"
         />
+
 
 
 

@@ -2,6 +2,8 @@ package dadm.scaffold.engine;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.SystemClock;
+import android.widget.Chronometer;
 import android.widget.Space;
 import android.widget.TextView;
 
@@ -27,6 +29,7 @@ public class GameEngine {
     public InputController theInputController;
     private final GameView theGameView;
 
+
     public int width;
     public int height;
     public double pixelFactor;
@@ -38,6 +41,9 @@ public class GameEngine {
 
     private Activity mainActivity;
 
+    private Chronometer chrono;
+    private float time;
+
     public GameEngine(Activity activity, GameView gameView) {
         mainActivity = activity;
         theGameView = gameView;
@@ -47,11 +53,15 @@ public class GameEngine {
         this.height = theGameView.getHeight()
                 - theGameView.getPaddingTop() - theGameView.getPaddingTop();
 
-        this.pixelFactor = this.height / 400d;
+        this.pixelFactor = this.height / 1200d;
 
         this.lives = 3;
         this.score = 0;
+        this.time = 0;
         isPausedAvailable = false;
+
+        chrono = new Chronometer(getContext());
+        chrono.start();
     }
 
     public void setTheInputController(InputController inputController) {
@@ -143,6 +153,7 @@ public class GameEngine {
             }
         }
 
+        checkTime();
     }
 
     public void onDraw() {
@@ -212,5 +223,19 @@ public class GameEngine {
     public int getDrawable(){
         int drawable = ((ScaffoldActivity)mainActivity).getShip();
         return drawable;
+    }
+
+    //TIME
+
+
+    private void checkTime(){
+        time = (SystemClock.elapsedRealtime() - chrono.getBase()) / 1000;
+        System.out.println(time);
+        if (time>=30){
+            isPausedAvailable = false;
+            ((ScaffoldActivity)mainActivity).stopGame(this);
+            ((ScaffoldActivity)mainActivity).sendScore(score);
+            ((ScaffoldActivity)mainActivity).endGame(this);
+        }
     }
 }

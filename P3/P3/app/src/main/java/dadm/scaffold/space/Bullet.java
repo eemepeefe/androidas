@@ -12,8 +12,8 @@ public class Bullet extends Sprite {
     private SpaceShipPlayer parent;
 
     public Bullet(GameEngine gameEngine){
-        super(gameEngine, R.drawable.bullet);
-        speedFactor = gameEngine.pixelFactor * -300d / 1000d;
+        super(gameEngine, R.drawable.bulletblue);
+        speedFactor = gameEngine.pixelFactor * -800d / 1000d;
     }
 
     @Override

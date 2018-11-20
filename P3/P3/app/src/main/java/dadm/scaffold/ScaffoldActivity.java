@@ -31,7 +31,7 @@ public class ScaffoldActivity extends AppCompatActivity {
                     .add(R.id.container, new MainMenuFragment(), TAG_FRAGMENT)
                     .commit();
         }
-        ship = R.drawable.ufo1;
+        ship = R.drawable.ufo_hd2;
     }
 
     public void startGame() {

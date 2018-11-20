@@ -19,9 +19,9 @@ public class Asteroid extends Sprite {
 
     public Asteroid(GameController gameController, GameEngine
             gameEngine) {
-        super(gameEngine, R.drawable.snake
+        super(gameEngine, R.drawable.snake2
                 );
-        mSpeed = 200d*pixelFactor/1000d;
+        mSpeed = 400d*pixelFactor/1000d;
         mController = gameController;
         rnd = new Random();
     }
@@ -33,10 +33,10 @@ public class Asteroid extends Sprite {
         mSpeedX = mSpeed * Math.sin(angle);
         mSpeedY = mSpeed * Math.cos(angle);
 // Asteroids initialize in the central 50% of the screen
-        positionX = rnd.nextInt(gameEngine.width/2)+
+        positionX = rnd.nextInt(gameEngine.width/3)+
                 gameEngine.width/4;
 // They initialize outside of the screen vertically
-        positionY = -imageHeight;
+        positionY = 0;
         rotation = rnd.nextInt(360);
         rotationSpeed = angle*(180d / Math.PI)/250d;
 

@@ -22,7 +22,7 @@ public class ConfigFragment extends BaseFragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_config, container, false);
-        ship = R.drawable.ufo1;
+        ship = R.drawable.ufo_hd;
         return rootView;
     }
 
