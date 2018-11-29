@@ -2,6 +2,7 @@ package dadm.scaffold.engine;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.SystemClock;
 import android.widget.Chronometer;
 import android.widget.Space;
@@ -9,10 +10,12 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import dadm.scaffold.EndGameFragment;
+import dadm.scaffold.R;
 import dadm.scaffold.ScaffoldActivity;
 import dadm.scaffold.input.InputController;
 import dadm.scaffold.space.SpaceShipPlayer;
@@ -42,7 +45,9 @@ public class GameEngine {
     private Activity mainActivity;
 
     private Chronometer chrono;
+    private MediaPlayer player;
     private float time;
+    private boolean prepared = false;
 
     public GameEngine(Activity activity, GameView gameView) {
         mainActivity = activity;
@@ -60,6 +65,8 @@ public class GameEngine {
         this.time = 0;
         isPausedAvailable = false;
 
+        player = new MediaPlayer();
+
         chrono = new Chronometer(getContext());
         chrono.start();
     }
@@ -68,10 +75,15 @@ public class GameEngine {
         theInputController = inputController;
     }
 
+    private void startMusic(){
+        player = MediaPlayer.create(getContext(), R.raw.dnb_background);
+        player.start();
+    }
+
     public void startGame() {
         // Stop a game if it is running
         stopGame();
-
+        startMusic();
         // Setup the game objects
         int numGameObjects = gameObjects.size();
         for (int i = 0; i < numGameObjects; i++) {
@@ -204,6 +216,7 @@ public class GameEngine {
             ((ScaffoldActivity)mainActivity).updateLivesandScore(returnScoreAndLives());
         } else if (lives == 0){
             isPausedAvailable = false;
+            player.stop();
             ((ScaffoldActivity)mainActivity).stopGame(this);
             ((ScaffoldActivity)mainActivity).sendScore(score);
             ((ScaffoldActivity)mainActivity).endGame(this);
@@ -233,6 +246,7 @@ public class GameEngine {
         System.out.println(time);
         if (time>=30){
             isPausedAvailable = false;
+            player.stop();
             ((ScaffoldActivity)mainActivity).stopGame(this);
             ((ScaffoldActivity)mainActivity).sendScore(score);
             ((ScaffoldActivity)mainActivity).endGame(this);

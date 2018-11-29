@@ -143,7 +143,7 @@ public class GameFragment extends BaseFragment implements View.OnClickListener {
             @Override
             public void run() {
                 TextView livesandscore = (TextView) getView().findViewById(R.id.livesandscore);
-                livesandscore.setText("Lives: " + aux[1] + "  Score: " + aux[0]);
+                livesandscore.setText("Vidas: " + aux[1] + "  Puntos: " + aux[0]);
             }
         });
 

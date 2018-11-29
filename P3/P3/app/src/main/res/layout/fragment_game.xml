@@ -17,13 +17,13 @@
         android:layout_width="158dp"
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
+        android:fontFamily="@font/magical"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:background="@drawable/buttonshape"
         android:text="@string/pause"
         android:textSize="20dp"
         android:textStyle="bold" />
-
 
     <TextView
         android:id="@+id/livesandscore"
@@ -32,7 +32,8 @@
         android:layout_gravity="top|left"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="Lives: 3 Score: 0"
+        android:fontFamily="@font/magical"
+        android:text="Vidas: 3 Puntos: 0"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:textStyle="bold" />

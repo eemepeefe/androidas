@@ -32,7 +32,7 @@ public class ConfigFragment extends BaseFragment implements View.OnClickListener
         view.findViewById(R.id.respuesta1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ship = R.drawable.ufo2;
+                ship = R.drawable.ufo_hd_am;
                 ((ScaffoldActivity)getActivity()).setShip(ship);
             }
         });
@@ -40,7 +40,7 @@ public class ConfigFragment extends BaseFragment implements View.OnClickListener
         view.findViewById(R.id.respuesta2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ship = R.drawable.ufo3;
+                ship = R.drawable.ufo_hd_rosa;
                 ((ScaffoldActivity)getActivity()).setShip(ship);
             }
         });

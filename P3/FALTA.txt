@@ -1,4 +1,0 @@
-Cambiar naves nuevas en el menu 
-meter sonido
-retocar disparos y enemigos
-memoria

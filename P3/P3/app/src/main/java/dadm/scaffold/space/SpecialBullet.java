@@ -1,5 +1,7 @@
 package dadm.scaffold.space;
 
+import android.media.MediaPlayer;
+
 import dadm.scaffold.R;
 import dadm.scaffold.engine.GameEngine;
 import dadm.scaffold.engine.ScreenGameObject;
@@ -10,6 +12,7 @@ public class SpecialBullet extends Sprite {
     private double speedFactor;
 
     private SpaceShipPlayer parent;
+    private boolean side = false;
 
     public SpecialBullet(GameEngine gameEngine){
         super(gameEngine, R.drawable.specialbomb);
@@ -22,6 +25,8 @@ public class SpecialBullet extends Sprite {
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
         positionY += speedFactor * elapsedMillis;
+        positionX += speedFactor * elapsedMillis;
+
         if (positionY < -imageHeight) {
             gameEngine.removeGameObject(this);
             // And return it to the pool

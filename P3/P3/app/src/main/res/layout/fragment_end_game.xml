@@ -12,16 +12,17 @@
         android:layout_marginLeft="16dp"
         android:id="@+id/finalscore"
         android:textSize="30dp"
+        android:fontFamily="@font/magical"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:text="GAME OVER! FINAL SCORE: "
+        android:text="GAME OVER! Puntuación final: "
         />
 
 
     <Button
         android:id="@+id/back_to_menu"
-        android:text="Back to menu"
-
+        android:text="Volver al menú"
+        android:fontFamily="@font/magical"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
 
